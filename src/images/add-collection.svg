@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY st0 "fill:none;stroke:#4BC1D2;stroke-width:40;stroke-miterlimit:10;">
+	<!ENTITY st1 "fill:none;stroke:#4BC1D2;stroke-width:80;stroke-miterlimit:10;">
+	<!ENTITY st2 "fill:#4BC1D2;">
+]>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1310 805.8" style="enable-background:new 0 0 1310 805.8;" xml:space="preserve">
+<path style="&st0;" d="M13,602.8"/>
+<path style="&st0;" d="M13,32.2"/>
+<path style="&st0;" d="M130.4,602.8"/>
+<path style="&st0;" d="M130.4,126.1"/>
+<path style="&st0;" d="M249,602.8"/>
+<path style="&st0;" d="M249,86.2"/>
+<path style="&st0;" d="M559.6,602.8"/>
+<path style="&st0;" d="M296.5,18.1"/>
+<line style="&st1;" x1="60.8" y1="25.7" x2="60.8" y2="798.5"/>
+<line style="&st1;" x1="246.9" y1="172.4" x2="246.9" y2="798.5"/>
+<line style="&st1;" x1="439.7" y1="111.5" x2="439.7" y2="798.5"/>
+<line style="&st1;" x1="518.4" y1="18.1" x2="906.3" y2="785"/>
+<path style="&st1;" d="M939.1,838.5"/>
+<path style="&st1;" d="M13,838.5"/>
+<g id="Page-1">
+	<g id="Icons" transform="translate(-129.000000, -2286.000000)">
+		<g id="Add" transform="translate(129.000000, 2286.000000)">
+			<polyline id="Fill-113" style="&st2;" points="1306,201.7 1114.3,201.7 1114.3,10 1073.9,10 1073.9,201.7 882.2,201.7 
+				882.2,242.1 1073.9,242.1 1073.9,433.8 1114.3,433.8 1114.3,242.1 1306,242.1 1306,201.7 			"/>
+		</g>
+	</g>
+</g>
+</svg>
