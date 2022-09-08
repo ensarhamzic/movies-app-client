@@ -1,0 +1,11 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  width: 235px;
+  height: 100vh;
+  background-color: #f6f6f6;
+}
+
+.upgradeBtn {
+  margin: 20px;
+}
