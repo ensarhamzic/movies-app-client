@@ -1,0 +1,34 @@
+.item {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  height: 50px;
+  transition: all 300ms;
+  transform: translateX(-25px);
+}
+
+.wrapper:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
+.wrapper:hover .item {
+  transform: translateX(10px);
+}
+
+.title {
+  margin-left: 20px;
+  font-size: 1.2rem;
+}
+
+.img {
+  width: 25px;
+  transform: translateX(-25px);
+  opacity: 0;
+  transition: all 300ms;
+}
+
+.wrapper:hover img {
+  opacity: 1;
+  transform: translateX(10px);
+}
