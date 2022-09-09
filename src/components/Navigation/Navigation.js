@@ -8,7 +8,7 @@ import classes from "./Navigation.module.css"
 const Navigation = () => {
   return (
     <div className={classes.nav}>
-      <Logo />
+      <Logo className={classes.logo} />
       <NavigationList />
       <Button className={classes.upgradeBtn} content="Upgrade" />
       <SocialBar />
