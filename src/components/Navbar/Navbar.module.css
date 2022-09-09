@@ -22,3 +22,7 @@
 .actions a:hover {
   color: #4bc1d2;
 }
+
+.active {
+  color: #4bc1d2 !important;
+}
