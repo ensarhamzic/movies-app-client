@@ -1,0 +1,21 @@
+.form input {
+  width: 400px;
+}
+
+.form div {
+  margin-top: 20px;
+}
+
+.submitBtn {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.inputGroup {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0 !important;
+}
+.inputGroup input {
+  width: 170px;
+}
