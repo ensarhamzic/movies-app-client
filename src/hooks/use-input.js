@@ -11,7 +11,7 @@ const useInput = (validateValue, initialValue = "") => {
     setError(validateValue(value))
   }, [value, validateValue])
 
-  return { value, onChange: handleChange, error, validateValue }
+  return { value, onChange: handleChange, error, validateValue, setValue }
 }
 
 export default useInput
