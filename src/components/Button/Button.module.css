@@ -12,3 +12,7 @@
 .button:hover {
   background-color: #0096b5;
 }
+
+.button:disabled {
+  background-color: #86a7ac !important;
+}
