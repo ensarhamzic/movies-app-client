@@ -9,6 +9,7 @@ const Input = ({
   error,
   submitted,
   className,
+  disabled = false,
 }) => {
   const [blurred, setBlurred] = useState(false)
   const blurHandler = () => {
@@ -30,6 +31,7 @@ const Input = ({
         onChange={onChange}
         onFocus={focusHandler}
         onBlur={blurHandler}
+        disabled={disabled}
       />
     </div>
   )
