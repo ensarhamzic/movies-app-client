@@ -1,0 +1,48 @@
+.wrapper {
+  padding: 20px 50px;
+  flex-grow: 1;
+}
+
+.header {
+  font-size: 2.5rem;
+}
+
+.wrapper hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #dedede;
+  margin: 1em 0;
+  padding: 0;
+}
+
+.newCollectionText {
+  font-size: 1.2rem;
+  margin-top: 40px;
+}
+
+.label {
+  font-weight: bold;
+  font-size: 2rem;
+  display: block;
+  margin-top: 30px;
+}
+
+.input {
+  margin-top: 30px;
+  width: 60%;
+}
+
+.input input {
+  width: 100%;
+  height: 30px;
+}
+
+.submitBtn {
+  margin-top: 20px;
+}
+
+.description {
+  font-style: italic;
+  font-size: 0.9rem;
+}
