@@ -11,10 +11,6 @@
   align-items: center;
 }
 
-.card input {
-  width: 330px;
-}
-
 .card div {
   margin-top: 20px;
 }
@@ -33,11 +29,6 @@
   margin-left: 20px;
   font-size: 1.3rem;
   font-weight: 300;
-}
-
-.submitBtn {
-  margin-top: 20px;
-  width: 100%;
 }
 
 .footer {
