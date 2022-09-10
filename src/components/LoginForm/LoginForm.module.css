@@ -1,0 +1,12 @@
+.form input {
+  width: 330px;
+}
+
+.form div {
+  margin-top: 20px;
+}
+
+.submitBtn {
+  margin-top: 20px;
+  width: 100%;
+}
