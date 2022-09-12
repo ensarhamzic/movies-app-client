@@ -14,8 +14,11 @@ const useHttp = () => {
       token,
       errorMessage,
       contentType = "application/json",
+      defaultAPI = true,
     }) => {
-      const fullUrl = `${API_URL}${url}`
+      let fullUrl = ""
+      if (defaultAPI) fullUrl = `${API_URL}${url}`
+      else fullUrl = url
       setIsLoading(true)
       setError(null)
       let fetchConfig = {

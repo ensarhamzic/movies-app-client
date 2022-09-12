@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const useInput = (validateValue, initialValue = "") => {
+const useInput = (validateValue = null, initialValue = "") => {
   const [value, setValue] = useState(initialValue)
   const [error, setError] = useState(null)
   const handleChange = (event) => {
@@ -8,7 +8,7 @@ const useInput = (validateValue, initialValue = "") => {
   }
 
   useEffect(() => {
-    setError(validateValue(value))
+    if (validateValue) setError(validateValue(value))
   }, [value, validateValue])
 
   return { value, onChange: handleChange, error, validateValue, setValue }
