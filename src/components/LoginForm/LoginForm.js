@@ -104,12 +104,9 @@ const LoginForm = () => {
         submitted={formSubmitted}
         disabled={isLoading}
       />
-      <Button
-        className={classes.submitBtn}
-        type="submit"
-        content="Sign In"
-        disabled={isLoading}
-      />
+      <Button className={classes.submitBtn} type="submit" disabled={isLoading}>
+        Sign In
+      </Button>
     </Form>
   )
 }

@@ -10,7 +10,7 @@ const Navigation = () => {
     <div className={classes.nav}>
       <Logo className={classes.logo} />
       <NavigationList />
-      <Button className={classes.upgradeBtn} content="Upgrade" />
+      <Button className={classes.upgradeBtn}>Upgrade</Button>
       <SocialBar />
     </div>
   )

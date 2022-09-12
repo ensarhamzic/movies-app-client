@@ -7,7 +7,9 @@ import Form from "../../components/Form/Form"
 import useHttp from "../../hooks/use-http"
 import Spinner from "../../components/Spinner/Spinner"
 import NotificationManager from "react-notifications/lib/NotificationManager"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import AuthPageWrapper from "../../components/AuthPageWrapper/AuthPageWrapper"
+import { collectionsActions } from "../../store/collections-slice"
 
 const validateCollectionName = (name) => {
   if (name.length >= 1 && name.length <= 50) return null
@@ -16,6 +18,7 @@ const validateCollectionName = (name) => {
 }
 
 const AddCollection = () => {
+  const dispatch = useDispatch()
   const {
     value: titleValue,
     onChange: onTitleChange,
@@ -51,6 +54,7 @@ const AddCollection = () => {
     if (!response) return
 
     setTitleValue("")
+    dispatch(collectionsActions.addCollection({ collection: response }))
     NotificationManager.success("Collection added!", "Success", 3000)
   }
 
@@ -61,12 +65,12 @@ const AddCollection = () => {
   }, [error])
 
   return (
-    <div className={classes.wrapper}>
+    <AuthPageWrapper className={classes.content}>
       <h1 className={classes.header}>Add Collection</h1>
       <hr />
       <p className={classes.newCollectionText}>Create New Collection</p>
-      <label className={classes.label}>Collection Title</label>
       <Form onSubmit={addCollectionHandler}>
+        <label className={classes.label}>Collection Title</label>
         <Spinner loading={isLoading} size={150} />
         <Input
           className={classes.input}
@@ -82,13 +86,11 @@ const AddCollection = () => {
           Limit 50 characters. e.g. (My movies, Movie Wishlist, Best movies,
           etc.)
         </p>
-        <Button
-          className={classes.submitBtn}
-          content="Add Collection"
-          type="submit"
-        />
+        <Button className={classes.submitBtn} type="submit">
+          Add Collection
+        </Button>
       </Form>
-    </div>
+    </AuthPageWrapper>
   )
 }
 

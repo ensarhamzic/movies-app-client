@@ -1,0 +1,17 @@
+.wrapper select {
+  height: 40px;
+  font-size: 1.3rem;
+  border: 2px solid #bad7e3;
+  outline: none;
+  border-radius: 5px;
+  padding: 5px 20px;
+}
+
+.wrapper select:focus {
+  border-color: #93a7af !important;
+  background-color: #f0f0f0 !important;
+}
+
+.error select {
+  border-color: #df6c5e;
+}

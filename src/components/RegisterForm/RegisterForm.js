@@ -180,12 +180,9 @@ const RegisterForm = () => {
           disabled={isLoading}
         />
       </div>
-      <Button
-        className={classes.submitBtn}
-        type="submit"
-        content="Sign In"
-        disabled={isLoading}
-      />
+      <Button className={classes.submitBtn} type="submit" disabled={isLoading}>
+        Register
+      </Button>
     </Form>
   )
 }
