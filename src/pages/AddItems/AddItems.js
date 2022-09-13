@@ -18,14 +18,15 @@ const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
 const AddItems = () => {
   const collections = useSelector((state) => state.collections.data)
+  const genres = useSelector((state) => state.genres.data)
   const [movies, setMovies] = useState([])
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [hasMore, setHasMore] = useState(false)
   const [currentMovieName, setCurrentMovieName] = useState("")
   const { isLoading: moviesLoading, sendRequest: searchMovies } = useHttp()
-
   const { value: choosenCollection, onChange: onCollectionChange } = useInput()
+
   const {
     value: movieNameValue,
     onChange: onMovieNameChange,
@@ -54,12 +55,21 @@ const AddItems = () => {
     })
 
     if (!response) return
-    const newMovies = response.results.filter((m) => {
+    let newMovies = response.results.filter((m) => {
       let movieExists = false
       movies.forEach((mov) => {
         if (mov.id === m.id) movieExists = true
       })
       return !movieExists
+    })
+
+    const getGenreById = (id) => {
+      return genres.find((g) => g.id === id)
+    }
+
+    newMovies = newMovies.map((m) => {
+      const newGenres = m.genre_ids.map((gid) => getGenreById(gid))
+      return { ...m, genres: newGenres }
     })
 
     setMovies((prevMovies) => [...prevMovies, ...newMovies])
@@ -69,17 +79,17 @@ const AddItems = () => {
       setHasMore(true)
       setCurrentPage((prevPage) => prevPage + 1)
     }
-  }, [currentPage, currentMovieName, searchMovies, movies])
+  }, [currentPage, currentMovieName, searchMovies, movies, genres])
 
   const moviesLength = movies.length
   useEffect(() => {
-    if (formSubmitted && moviesLength === 0) {
+    if (formSubmitted && moviesLength === 0 && currentMovieName) {
       setFormSubmitted(false)
       ;(async () => {
         await searchMoviesHelper()
       })()
     }
-  }, [formSubmitted, searchMoviesHelper, moviesLength])
+  }, [formSubmitted, searchMoviesHelper, moviesLength, currentMovieName])
 
   const moviesScrollHandler = async () => {
     if (currentPage === 1) return
@@ -91,17 +101,27 @@ const AddItems = () => {
       <Spinner loading={moviesLoading} className={classes.spinner} />
       <h1 className={classes.header}>Add Item To Collection</h1>
       <hr />
-      <label className={classes.label}>Select Collection</label>
-      <Select
-        options={collections}
-        className={classes.select}
-        value={choosenCollection}
-        onChange={onCollectionChange}
-      />
-      <p className={classes.description}>
-        Choose the collection you're adding items to. Don't need to select if
-        you want to add movie to favorites
-      </p>
+      {collections.length > 0 && (
+        <>
+          <label className={classes.label}>Select Collection</label>
+          <Select
+            options={collections}
+            className={classes.select}
+            value={choosenCollection}
+            onChange={onCollectionChange}
+            placeholder="--- Choose Collection ---"
+          />
+          <p className={classes.description}>
+            Choose the collection you're adding items to. Don't need to select
+            if you want to add movie to favorites
+          </p>
+        </>
+      )}
+      {collections.length === 0 && (
+        <p className={classes.noCollections}>
+          Create at least one collection to be able to add movies to it
+        </p>
+      )}
       <Form onSubmit={searchMoviesHandler}>
         <label className={classes.label}>Search For Movies</label>
         <Input

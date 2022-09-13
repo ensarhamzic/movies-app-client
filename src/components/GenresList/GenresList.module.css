@@ -1,0 +1,15 @@
+.genres {
+  display: flex;
+}
+
+.genres p {
+  background-color: #ececec;
+  padding: 5px;
+  margin-left: 10px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.genres p:first-of-type {
+  margin-left: 0;
+}

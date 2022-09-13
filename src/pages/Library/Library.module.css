@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.collectionSelect {
+  width: 60%;
+}
+
+.collectionSelect select {
+  width: 100%;
+  height: 60px;
+  background-color: #eeeeef;
+  outline: none;
+  border: none;
+  font-weight: bold;
+  font-size: 1.7rem;
+}
+
+.letters {
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.headerActions {
+  display: flex;
+}

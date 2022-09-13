@@ -1,0 +1,14 @@
+.letters {
+  color: black;
+  font-weight: 300;
+}
+
+.letters span {
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.choosen {
+  color: #7ac1d2;
+  font-weight: bold;
+}

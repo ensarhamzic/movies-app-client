@@ -9,28 +9,32 @@ import "react-notifications/lib/notifications.css"
 import { NotificationContainer } from "react-notifications"
 import AddCollection from "./pages/AddCollection/AddCollection"
 import AddItems from "./pages/AddItems/AddItems"
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import useHttp from "./hooks/use-http"
 import { useDispatch } from "react-redux"
 import { authActions } from "./store/auth-slice"
 import Spinner from "./components/Spinner/Spinner"
 import { collectionsActions } from "./store/collections-slice"
 import { favoritesActions } from "./store/favorites-slice"
+import Library from "./pages/Library/Library"
+import { genresActions } from "./store/genres-slice"
+
+const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
 const App = () => {
   const dispatch = useDispatch()
   const isAuth = useSelector((state) => state.auth.isAuth)
   const authToken = useSelector((state) => state.auth.token)
-  const [loggingIn, setLoggingIn] = useState(false)
-  const { sendRequest: verifyToken } = useHttp()
-  const { sendRequest: getCollections } = useHttp()
-  const { sendRequest: getFavorites } = useHttp()
+  const { isLoading: loggingIn, sendRequest: verifyToken } = useHttp()
+  const { isLoading: gettingCollections, sendRequest: getCollections } =
+    useHttp()
+  const { isLoading: gettingFavorites, sendRequest: getFavorites } = useHttp()
+  const { isLoading: gettingGenres, sendRequest: getGenres } = useHttp()
 
   useEffect(() => {
     const token = localStorage.getItem("token")
     if (token) {
       ;(async () => {
-        setLoggingIn(true)
         const response = await verifyToken({
           url: "/users/verify",
           method: "POST",
@@ -39,12 +43,10 @@ const App = () => {
 
         if (!response) {
           localStorage.removeItem("token")
-          setLoggingIn(false)
           return
         }
 
         dispatch(authActions.login({ token, user: response.user }))
-        setLoggingIn(false)
       })()
     }
   }, [dispatch, verifyToken])
@@ -66,6 +68,20 @@ const App = () => {
   }, [isAuth, getCollections, authToken, dispatch])
 
   useEffect(() => {
+    ;(async () => {
+      const response = await getGenres({
+        url: `https://api.themoviedb.org/3/genre/movie/list?api_key=${TMDB_API_KEY}`,
+        method: "GET",
+        defaultAPI: false,
+      })
+
+      if (!response) return
+
+      dispatch(genresActions.loadGenres({ genres: response.genres }))
+    })()
+  }, [dispatch, getGenres])
+
+  useEffect(() => {
     if (isAuth) {
       ;(async () => {
         const response = await getFavorites({
@@ -83,7 +99,12 @@ const App = () => {
 
   return (
     <>
-      <Spinner loading={loggingIn} size={150} />
+      <Spinner
+        loading={
+          loggingIn || gettingCollections || gettingFavorites || gettingGenres
+        }
+        size={150}
+      />
       <Routes>
         <Route
           path="/"
@@ -96,6 +117,7 @@ const App = () => {
         <div className={classes.authApp}>
           <Navigation />
           <Routes>
+            <Route path="/library" element={<Library />} />
             <Route path="/add-collection" element={<AddCollection />} />
             <Route path="/add-items" element={<AddItems />} />
           </Routes>

@@ -1,0 +1,29 @@
+.movie {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  width: 200px;
+  align-items: center;
+}
+
+.movie img {
+  width: 130px;
+  height: 195px;
+}
+
+.title {
+  font-weight: bold;
+  margin: 0;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.genres {
+  flex-wrap: wrap;
+}
+
+.genres p {
+  margin: 10px 10px 0 0;
+  font-size: 0.7rem;
+}

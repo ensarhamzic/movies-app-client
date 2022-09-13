@@ -14,8 +14,9 @@ import { collectionsActions } from "../../store/collections-slice"
 import { useDispatch } from "react-redux"
 import Spinner from "../Spinner/Spinner"
 import { favoritesActions } from "../../store/favorites-slice"
+import GenresList from "../GenresList/GenresList"
 
-const imageBaseUrl = "https://image.tmdb.org/t/p/w500"
+const IMAGE_BASE_URL = process.env.REACT_APP_IMAGE_BASE_URL
 
 const MovieItem = ({ movie, collection }) => {
   const dispatch = useDispatch()
@@ -92,7 +93,7 @@ const MovieItem = ({ movie, collection }) => {
   }, [addToFavoritesError])
 
   let posterSrc = ""
-  if (movie.poster_path) posterSrc = `${imageBaseUrl}${movie.poster_path}`
+  if (movie.poster_path) posterSrc = `${IMAGE_BASE_URL}${movie.poster_path}`
   else posterSrc = "https://via.placeholder.com/250x375"
 
   let collectionButtonContent = ""
@@ -146,6 +147,7 @@ const MovieItem = ({ movie, collection }) => {
         </div>
         <div className={classes.details}>
           <p className={classes.title}>{movie.title}</p>
+          <GenresList genres={movie.genres} />
           <div className={classes.inner}>
             <p>
               <span>Release date: </span>
