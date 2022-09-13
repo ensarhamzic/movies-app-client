@@ -18,6 +18,7 @@ import { collectionsActions } from "./store/collections-slice"
 import { favoritesActions } from "./store/favorites-slice"
 import Library from "./pages/Library/Library"
 import { genresActions } from "./store/genres-slice"
+import Publish from "./pages/Publish/Publish"
 
 const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
@@ -120,6 +121,7 @@ const App = () => {
             <Route path="/library" element={<Library />} />
             <Route path="/add-collection" element={<AddCollection />} />
             <Route path="/add-items" element={<AddItems />} />
+            <Route path="/publish" element={<Publish />} />
           </Routes>
         </div>
       )}
