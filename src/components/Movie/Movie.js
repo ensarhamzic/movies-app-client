@@ -1,5 +1,4 @@
 import React from "react"
-import GenresList from "../GenresList/GenresList"
 import classes from "./Movie.module.css"
 
 const IMAGE_BASE_URL = process.env.REACT_APP_IMAGE_BASE_URL
