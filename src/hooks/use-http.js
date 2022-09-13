@@ -36,6 +36,7 @@ const useHttp = () => {
       let response = null
       const serverResponse = await fetch(fullUrl, fetchConfig)
       response = await serverResponse.json()
+
       if (!serverResponse.ok) {
         setError(errorMessage || response.message)
         setIsLoading(false)
