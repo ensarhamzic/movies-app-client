@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { useEffect } from "react"
 import { useState } from "react"
 import { useSelector } from "react-redux"
@@ -10,6 +10,10 @@ import Spinner from "../../components/Spinner/Spinner"
 import useHttp from "../../hooks/use-http"
 import useInput from "../../hooks/use-input"
 import classes from "./Library.module.css"
+import Button from "../../components/Button/Button"
+import { FaArrowUp, FaArrowDown } from "react-icons/fa"
+import { BsFilter } from "react-icons/bs"
+import Filters from "../../components/Filters/Filters"
 
 const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
@@ -19,8 +23,17 @@ const Library = () => {
   const [movies, setMovies] = useState([])
   const [filteredMovies, setFilteredMovies] = useState([])
   const [loadingMovies, setLoadingMovies] = useState(false)
+  const [filtersShowed, setFiltersShowed] = useState(false)
+  const [filtersHiding, setFiltersHiding] = useState(false)
+  const [filters, setFilters] = useState(null)
   const { sendRequest: getMovieDetails } = useHttp()
   const { value: collection, onChange: onCollectionChange } = useInput()
+  const { value: showType, onChange: onShowTypeChange } = useInput(
+    null,
+    "Cover"
+  )
+  const { value: sorting, onChange: onSortingChange } = useInput(null, "Title")
+  const [sortAscending, setSortAscendig] = useState(true)
 
   let choosenCollection = null
   if (collection) {
@@ -38,6 +51,7 @@ const Library = () => {
           method: "GET",
           defaultAPI: false,
         })
+        response.vote_average = Math.round(response.vote_average * 10) / 10
         tempMovies.push(response)
       }
       setMovies([...tempMovies])
@@ -45,49 +59,157 @@ const Library = () => {
     })()
   }, [getMovieDetails, choosenCollection, collection])
 
+  const filterByLetter = useCallback(
+    (movs) => {
+      if (choosenLetter === "ALL") {
+        setFilteredMovies([...movs])
+      } else if (choosenLetter === "#") {
+        setFilteredMovies(
+          movs.filter((m) => m.title.charAt(0).match(/[^a-zA-z]/))
+        )
+      } else {
+        setFilteredMovies(
+          movs.filter((m) => m.title.charAt(0) === choosenLetter)
+        )
+      }
+    },
+    [choosenLetter]
+  )
+
   useEffect(() => {
     if (!choosenCollection || loadingMovies) return
-    if (choosenLetter === "ALL") {
-      setFilteredMovies([...movies])
-    } else if (choosenLetter === "#") {
-      setFilteredMovies(
-        movies.filter((m) => m.title.charAt(0).match(/[^a-zA-z]/))
-      )
-    } else {
-      setFilteredMovies(
-        movies.filter((m) => m.title.charAt(0) === choosenLetter)
-      )
-    }
-  }, [choosenCollection, loadingMovies, choosenLetter, movies])
+    filterByLetter(movies)
+  }, [choosenCollection, loadingMovies, filterByLetter, movies])
 
   const collectionChanged = (event) => {
     onCollectionChange(event)
     setChoosenLetter("ALL")
+    setFilters(null)
+    setFiltersShowed(false)
   }
+
+  const showTypeOptions = [
+    { id: "Cover", name: "Cover" },
+    { id: "List", name: "List" },
+    { id: "Summary", name: "Summary" },
+  ]
+
+  const sortingOptions = [
+    { id: "Title", name: "Title" },
+    { id: "Release Date", name: "Release Date" },
+    { id: "Rating", name: "Rating" },
+  ]
+
+  const sortOrderChange = () => {
+    setSortAscendig((prevSort) => !prevSort)
+  }
+
+  const filtersButtonClick = () => {
+    if (filtersShowed) {
+      setFiltersHiding(true)
+      setFiltersShowed(false)
+      setTimeout(() => {
+        setFiltersHiding(false)
+      }, 300)
+    } else {
+      setFiltersShowed(true)
+    }
+  }
+
+  useEffect(() => {
+    if (filters) {
+      let unfilteredMovies = [...movies]
+      unfilteredMovies = unfilteredMovies.filter(
+        (m) =>
+          m.vote_average >= filters.ratings.from &&
+          m.vote_average <= filters.ratings.to
+      )
+      if (filters.years.from)
+        unfilteredMovies = unfilteredMovies.filter(
+          (m) => m.release_date >= filters.years.from
+        )
+      if (filters.years.to) {
+        unfilteredMovies = unfilteredMovies.filter(
+          (m) => m.release_date <= filters.years.to
+        )
+      }
+      if (filters.genres.length > 0)
+        unfilteredMovies = unfilteredMovies.filter((m) => {
+          const movieGenres = m.genres.map((g) => g.id)
+          const filteredGenres = filters.genres.map((g) => g.value)
+          return movieGenres.some((r) => filteredGenres.indexOf(r) >= 0)
+        })
+
+      filterByLetter(unfilteredMovies)
+    } else {
+      filterByLetter(movies)
+      setFiltersShowed(false)
+    }
+  }, [filters, movies, filterByLetter])
 
   return (
     <AuthPageWrapper className={classes.content}>
       <Spinner loading={loadingMovies} />
-      <div className={classes.header}>
-        <div className={classes.search}></div>
-        <div className={classes.headerActions}>
-          <Select
-            value={collection}
-            onChange={collectionChanged}
-            options={collections}
-            className={classes.collectionSelect}
-            placeholder="--- Choose Collection ---"
+      <div
+        className={`${classes.mainContent} ${
+          filtersShowed ? classes.reduced : ""
+        }`}
+      >
+        <div className={classes.header}>
+          <div className={classes.search}></div>
+          <div className={classes.headerActions}>
+            <Select
+              value={collection}
+              onChange={collectionChanged}
+              options={collections}
+              className={classes.collectionSelect}
+              placeholder="--- Choose Collection ---"
+            />
+            <Select
+              value={showType}
+              onChange={onShowTypeChange}
+              options={showTypeOptions}
+              className={classes.showTypeSelect}
+            />
+            <div className={classes.sorting}>
+              <Select
+                value={sorting}
+                onChange={onSortingChange}
+                options={sortingOptions}
+                className={classes.sortingSelect}
+              />
+              <Button onClick={sortOrderChange}>
+                {sortAscending && <FaArrowUp />}
+                {!sortAscending && <FaArrowDown />}
+              </Button>
+            </div>
+            <Button className={classes.filterBtn} onClick={filtersButtonClick}>
+              <BsFilter />
+              Filters
+            </Button>
+          </div>
+          <LetterFilter
+            className={classes.letters}
+            onChange={setChoosenLetter}
+            choosenLetter={choosenLetter}
           />
         </div>
-        <LetterFilter
-          className={classes.letters}
-          onChange={setChoosenLetter}
-          choosenLetter={choosenLetter}
+        <div className={classes.movies}>
+          <Movies
+            movies={filteredMovies}
+            showType={showType}
+            sortBy={sorting}
+            ascending={sortAscending}
+          />
+        </div>
+      </div>
+      {(filtersShowed || filtersHiding) && (
+        <Filters
+          className={filtersHiding && classes.filtersHiding}
+          onFiltersApply={setFilters}
+          appliedFilters={filters}
         />
-      </div>
-      <div className={classes.movies}>
-        <Movies movies={filteredMovies} />
-      </div>
+      )}
     </AuthPageWrapper>
   )
 }

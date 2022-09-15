@@ -26,7 +26,11 @@ const App = () => {
   const dispatch = useDispatch()
   const isAuth = useSelector((state) => state.auth.isAuth)
   const authToken = useSelector((state) => state.auth.token)
-  const { isLoading: loggingIn, sendRequest: verifyToken } = useHttp()
+  const {
+    error: verifyTokenError,
+    isLoading: loggingIn,
+    sendRequest: verifyToken,
+  } = useHttp()
   const { isLoading: gettingCollections, sendRequest: getCollections } =
     useHttp()
   const { isLoading: gettingFavorites, sendRequest: getFavorites } = useHttp()
@@ -40,10 +44,10 @@ const App = () => {
           url: "/users/verify",
           method: "POST",
           token,
+          errorMessage: "Cannot verify stored token",
         })
 
         if (!response) {
-          localStorage.removeItem("token")
           return
         }
 
@@ -51,6 +55,13 @@ const App = () => {
       })()
     }
   }, [dispatch, verifyToken])
+
+  useEffect(() => {
+    if (verifyTokenError) {
+      localStorage.removeItem("token")
+      dispatch(authActions.logout())
+    }
+  }, [verifyTokenError, dispatch])
 
   useEffect(() => {
     if (isAuth) {
@@ -118,6 +129,8 @@ const App = () => {
         <div className={classes.authApp}>
           <Navigation />
           <Routes>
+            <Route path="/login" element={<Navigate to="/library" />} />
+            <Route path="/register" element={<Navigate to="/library" />} />
             <Route path="/library" element={<Library />} />
             <Route path="/add-collection" element={<AddCollection />} />
             <Route path="/add-items" element={<AddItems />} />

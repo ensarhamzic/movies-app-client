@@ -1,36 +1,6 @@
 import React from "react"
 import classes from "./LetterFilter.module.css"
-
-const letters = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-  "#",
-  "ALL",
-]
+import letters from "../../helpers/letters"
 
 const LetterFilter = ({ onChange, className, choosenLetter }) => {
   const letterClickHandler = (e) => {

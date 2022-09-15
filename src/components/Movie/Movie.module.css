@@ -1,4 +1,4 @@
-.movie {
+.coverMovie {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -7,23 +7,92 @@
   align-items: center;
 }
 
-.movie img {
+.coverMovie img {
   width: 130px;
   height: 195px;
 }
 
-.title {
+.coverTitle {
   font-weight: bold;
   margin: 0;
   margin-top: 10px;
   text-align: center;
 }
 
-.genres {
-  flex-wrap: wrap;
+.listMovie {
+  margin-top: 40px;
 }
 
-.genres p {
-  margin: 10px 10px 0 0;
-  font-size: 0.7rem;
+.listTitle {
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.listGenres p {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.listMovieDetails {
+  display: flex;
+}
+
+.listMovieDetails p {
+  margin-left: 20px;
+}
+
+.listMovieDetails p:first-of-type {
+  margin-left: 0;
+}
+
+.listMovieDetails span {
+  font-weight: bold;
+}
+
+.summaryMovie {
+  display: flex;
+  margin-top: 30px;
+  margin-left: 20px;
+  width: 45%;
+  box-shadow: none;
+  border: 1px solid #e6e6e6;
+  border-radius: 7px;
+}
+
+.summaryLeft img {
+  width: 115px;
+  height: 172px;
+}
+
+.summaryRight {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.summaryTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.summaryMovieDetails {
+  display: flex;
+}
+
+.summaryMovieDetails p {
+  margin-left: 20px;
+}
+
+.summaryMovieDetails p:first-of-type {
+  margin-left: 0;
+}
+
+.summaryMovieDetails span {
+  font-weight: bold;
+}
+
+.overview {
+  margin: 0;
 }

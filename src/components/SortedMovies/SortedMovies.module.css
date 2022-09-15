@@ -1,4 +1,4 @@
-.letter {
+.group {
   font-size: 1.6rem;
   color: #4bc1d2;
   font-weight: bold;
@@ -9,7 +9,16 @@
   border-top: 1px solid #ececec;
 }
 
-.movies {
+.coverMovies {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.listMovies {
+  display: block;
+}
+
+.summaryMovies {
   display: flex;
   flex-wrap: wrap;
 }

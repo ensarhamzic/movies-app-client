@@ -14,13 +14,14 @@ import { MultiSelect } from "react-multi-select-component"
 const validateName = (name) => {
   if (name.length === 0) return "Name cannot be empty"
   if (!name.match(/^[a-zA-Z0-9-_]+$/))
-    return "Name must only containt alphanumeric characters, dashes and underscores"
+    return "Name must only contain alphanumeric characters, dashes and underscores"
   return null
 }
 
 const Publish = () => {
   const collections = useSelector((state) => state.collections.data)
-  const { sendRequest: getUserPublish } = useHttp()
+  const { isLoading: gettingPublishUrl, sendRequest: getUserPublish } =
+    useHttp()
   const {
     isLoading: changingUrl,
     error: changeUrlError,
@@ -121,7 +122,7 @@ const Publish = () => {
 
   return (
     <AuthPageWrapper className={classes.content}>
-      <Spinner loading={changingUrl || publishing} />
+      <Spinner loading={changingUrl || publishing || gettingPublishUrl} />
       <h1 className={classes.header}>Publish personal page</h1>
       <hr />
       <Form onSubmit={urlNameSubmitHandler}>

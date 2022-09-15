@@ -4,7 +4,7 @@ import classes from "./Select.module.css"
 const Select = ({ className, options, value, onChange, placeholder }) => {
   return (
     <div className={`${classes.wrapper} ${className || ""}`}>
-      <select value={value} onChange={onChange}>
+      <select value={value} onChange={onChange} id="label">
         {placeholder && (
           <option value="" disabled hidden>
             {placeholder}

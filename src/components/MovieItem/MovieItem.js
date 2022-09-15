@@ -151,7 +151,7 @@ const MovieItem = ({ movie, collection }) => {
           <div className={classes.inner}>
             <p>
               <span>Release date: </span>
-              {movie.release_date}
+              {movie.release_date || "N/A"}
             </p>
             <p>
               <span>Rating: </span>

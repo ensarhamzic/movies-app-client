@@ -35,7 +35,13 @@ const useHttp = () => {
         }
       let response = null
       const serverResponse = await fetch(fullUrl, fetchConfig)
-      response = await serverResponse.json()
+      try {
+        response = await serverResponse.json()
+      } catch {
+        setError(errorMessage || "Unexpected error occured")
+        setIsLoading(false)
+        return null
+      }
 
       if (!serverResponse.ok) {
         setError(errorMessage || response.message)

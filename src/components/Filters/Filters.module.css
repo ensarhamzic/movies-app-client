@@ -1,0 +1,86 @@
+.content {
+  width: 260px;
+  /* box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000,
+    -6px 0px 18px 5px rgba(0, 0, 0, 0); */
+  border-left: 1px solid #ececec;
+  position: fixed;
+  right: 0;
+  height: 100vh;
+  animation-name: showAnimation;
+  animation-duration: 300ms;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.content hr {
+  border: none;
+  border-top: 1px solid #ececec;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header p {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.clearButton {
+  background-color: #df6c5e;
+  font-size: 1rem;
+}
+
+.clearButton:hover {
+  background-color: #bd5a4c !important;
+}
+
+.ratingSlider {
+  margin-top: 20px;
+}
+
+.datePickers {
+  display: flex;
+}
+
+.datePickers > div {
+  margin-left: 10px;
+}
+
+.datePickers > div:first-of-type {
+  margin-left: 0;
+}
+
+.datePickers input {
+  width: 70px;
+  appearance: none;
+}
+
+.filterLabel {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.applyButton {
+  margin-top: 20px;
+}
+
+.genresFilter {
+  margin-top: 30px;
+}
+
+.genresSelect {
+  margin-top: 20px;
+  width: 230px;
+}
+
+@keyframes showAnimation {
+  0% {
+    transform: translateX(260px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
