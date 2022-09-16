@@ -14,8 +14,21 @@ import Button from "../../components/Button/Button"
 import { FaArrowUp, FaArrowDown } from "react-icons/fa"
 import { BsFilter } from "react-icons/bs"
 import Filters from "../../components/Filters/Filters"
+import Search from "../../components/Search/Search"
 
 const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
+
+const showTypeOptions = [
+  { id: "Cover", name: "Cover" },
+  { id: "List", name: "List" },
+  { id: "Summary", name: "Summary" },
+]
+
+const sortingOptions = [
+  { id: "Title", name: "Title" },
+  { id: "Release Date", name: "Release Date" },
+  { id: "Rating", name: "Rating" },
+]
 
 const Library = () => {
   const collections = useSelector((state) => state.collections.data)
@@ -25,9 +38,15 @@ const Library = () => {
   const [loadingMovies, setLoadingMovies] = useState(false)
   const [filtersShowed, setFiltersShowed] = useState(false)
   const [filtersHiding, setFiltersHiding] = useState(false)
+  const [isInitial, setIsInitial] = useState(true)
   const [filters, setFilters] = useState(null)
+  const [search, setSearch] = useState(false)
   const { sendRequest: getMovieDetails } = useHttp()
-  const { value: collection, onChange: onCollectionChange } = useInput()
+  const {
+    value: collection,
+    onChange: onCollectionChange,
+    setValue: setCollection,
+  } = useInput()
   const { value: showType, onChange: onShowTypeChange } = useInput(
     null,
     "Cover"
@@ -39,6 +58,19 @@ const Library = () => {
   if (collection) {
     choosenCollection = collections.find((c) => c.id === parseInt(collection))
   }
+
+  const {
+    value: searchQuery,
+    onChange: onSearchQueryChange,
+    setValue: setSearchQuery,
+  } = useInput()
+
+  useEffect(() => {
+    if (collections.length > 0 && isInitial) {
+      setCollection(collections[0].id)
+      setIsInitial(false)
+    }
+  }, [collections, setCollection, isInitial])
 
   useEffect(() => {
     if (!collection) return
@@ -86,19 +118,9 @@ const Library = () => {
     setChoosenLetter("ALL")
     setFilters(null)
     setFiltersShowed(false)
+    setSearch(false)
+    setSearchQuery("")
   }
-
-  const showTypeOptions = [
-    { id: "Cover", name: "Cover" },
-    { id: "List", name: "List" },
-    { id: "Summary", name: "Summary" },
-  ]
-
-  const sortingOptions = [
-    { id: "Title", name: "Title" },
-    { id: "Release Date", name: "Release Date" },
-    { id: "Rating", name: "Rating" },
-  ]
 
   const sortOrderChange = () => {
     setSortAscendig((prevSort) => !prevSort)
@@ -117,6 +139,7 @@ const Library = () => {
   }
 
   useEffect(() => {
+    if (search) return
     if (filters) {
       let unfilteredMovies = [...movies]
       unfilteredMovies = unfilteredMovies.filter(
@@ -145,7 +168,18 @@ const Library = () => {
       filterByLetter(movies)
       setFiltersShowed(false)
     }
-  }, [filters, movies, filterByLetter])
+  }, [filters, movies, filterByLetter, search])
+
+  const searchHandler = (movies) => {
+    setFilteredMovies(movies)
+    setSearch(true)
+    setFiltersShowed(false)
+  }
+
+  const closeSearch = () => {
+    setSearch(false)
+    setSearchQuery("")
+  }
 
   return (
     <AuthPageWrapper className={classes.content}>
@@ -156,7 +190,14 @@ const Library = () => {
         }`}
       >
         <div className={classes.header}>
-          <div className={classes.search}></div>
+          <Search
+            movies={movies}
+            onSearch={searchHandler}
+            active={search}
+            onClose={closeSearch}
+            value={searchQuery}
+            onChange={onSearchQueryChange}
+          />
           <div className={classes.headerActions}>
             <Select
               value={collection}
@@ -183,16 +224,23 @@ const Library = () => {
                 {!sortAscending && <FaArrowDown />}
               </Button>
             </div>
-            <Button className={classes.filterBtn} onClick={filtersButtonClick}>
-              <BsFilter />
-              Filters
-            </Button>
+            {!search && (
+              <Button
+                className={classes.filterBtn}
+                onClick={filtersButtonClick}
+              >
+                <BsFilter />
+                Filters
+              </Button>
+            )}
           </div>
-          <LetterFilter
-            className={classes.letters}
-            onChange={setChoosenLetter}
-            choosenLetter={choosenLetter}
-          />
+          {!search && (
+            <LetterFilter
+              className={classes.letters}
+              onChange={setChoosenLetter}
+              choosenLetter={choosenLetter}
+            />
+          )}
         </div>
         <div className={classes.movies}>
           <Movies

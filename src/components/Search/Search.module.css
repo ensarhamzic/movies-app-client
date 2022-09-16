@@ -1,0 +1,37 @@
+.search {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.searchIcon {
+  font-size: 1.8rem;
+}
+
+.searchForm {
+  width: 90%;
+}
+
+.searchForm input {
+  width: 100%;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.closeSearch {
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.searchInstructions mark {
+  background-color: rgb(204, 203, 203);
+  padding: 0px 5px;
+  font-weight: bold;
+}
+
+.searchInstructions {
+  width: 500px;
+  position: absolute;
+  top: 80px;
+}

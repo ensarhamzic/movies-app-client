@@ -41,7 +41,6 @@ const Movies = ({ movies, showType, sortBy, ascending }) => {
 
   if (sortBy === "Rating") {
     let ratings = movies.map((m) => m.vote_average)
-    console.log(ratings)
     ratings = [...new Set(ratings)] // filters only unique values
     ratings.sort((a, b) => a - b)
     if (!ascending) ratings.reverse()
@@ -65,7 +64,6 @@ const Movies = ({ movies, showType, sortBy, ascending }) => {
 
   if (sortBy === "Release Date") {
     let releaseDates = movies.map((m) => m.release_date.substring(0, 4))
-    console.log(releaseDates)
     releaseDates = [...new Set(releaseDates)] // filters only unique values
     releaseDates.sort((a, b) => a - b)
     if (!ascending) releaseDates.reverse()

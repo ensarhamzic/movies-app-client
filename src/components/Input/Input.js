@@ -9,14 +9,18 @@ const Input = ({
   error,
   submitted,
   className,
+  onFocus,
+  onBlur,
   disabled = false,
 }) => {
   const [blurred, setBlurred] = useState(false)
   const blurHandler = () => {
     setBlurred(true)
+    onBlur && onBlur()
   }
   const focusHandler = () => {
     setBlurred(false)
+    onFocus && onFocus()
   }
 
   const wrapperClasses = `${classes.wrapper} ${
