@@ -3,7 +3,15 @@ import SortedMovies from "../SortedMovies/SortedMovies"
 import classes from "./Movies.module.css"
 import letters from "../../helpers/letters"
 
-const Movies = ({ movies, showType, sortBy, ascending }) => {
+const Movies = ({
+  movies,
+  showType,
+  sortBy,
+  ascending,
+  editing,
+  forFavorites,
+  collection,
+}) => {
   if (movies.length === 0)
     return <p className={classes.noMovies}>No movies found</p>
 
@@ -30,6 +38,9 @@ const Movies = ({ movies, showType, sortBy, ascending }) => {
                   movies={currentMovies}
                   groupName={letter}
                   showType={showType}
+                  editing={editing}
+                  forFavorites={forFavorites}
+                  collection={collection}
                 />
               )
             })}

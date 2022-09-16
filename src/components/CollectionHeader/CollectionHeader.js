@@ -8,6 +8,7 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa"
 import { BsFilter } from "react-icons/bs"
 import useInput from "../../hooks/use-input"
 import { useSelector } from "react-redux"
+import { AiOutlineEdit, AiOutlineStop } from "react-icons/ai"
 
 const showTypeOptions = [
   { id: "Cover", name: "Cover" },
@@ -37,7 +38,10 @@ const CollectionHeader = ({
   onSortOrderChange,
   sortAscending,
   hideFilters,
-  favorites = false,
+  forFavorites,
+  forCollections,
+  onEditClick,
+  editing,
   customCollections = null,
 }) => {
   const collections = useSelector((state) => state.collections.data)
@@ -131,7 +135,7 @@ const CollectionHeader = ({
         onChange={onSearchQueryChange}
       />
       <div className={classes.headerActions}>
-        {!favorites && (
+        {!forFavorites && (
           <Select
             value={collection}
             onChange={collectionChanged}
@@ -140,7 +144,10 @@ const CollectionHeader = ({
             placeholder="--- Choose Collection ---"
           />
         )}
-        {favorites && <div className={classes.favoritesTitle}>Favorites</div>}
+        {forFavorites && (
+          <div className={classes.favoritesTitle}>Favorites</div>
+        )}
+
         <Select
           value={showType}
           onChange={onShowTypeChange}
@@ -163,6 +170,12 @@ const CollectionHeader = ({
           <Button className={classes.filterBtn} onClick={onFiltersClick}>
             <BsFilter />
             Filters
+          </Button>
+        )}
+        {(forFavorites || forCollections) && (
+          <Button className={classes.editButton} onClick={onEditClick}>
+            {!editing && <AiOutlineEdit />}
+            {editing && <AiOutlineStop />}
           </Button>
         )}
       </div>

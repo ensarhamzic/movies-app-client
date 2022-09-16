@@ -89,3 +89,21 @@
   font-weight: bold;
   border-radius: 7px;
 }
+
+.editButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  margin-left: 15px;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  height: 40px;
+  width: 40px;
+  background-color: #df6c5e;
+}
+
+.editButton:hover {
+  background-color: #bd5a4c;
+}

@@ -19,6 +19,7 @@ const Library = () => {
   const [filtersShowed, setFiltersShowed] = useState(false)
   const [filtersHiding, setFiltersHiding] = useState(false)
   const [isInitial, setIsInitial] = useState(true)
+  const [editing, setEditing] = useState(false)
 
   const { value: showType, onChange: onShowTypeChange } = useInput(
     null,
@@ -97,6 +98,10 @@ const Library = () => {
     setFiltersShowed(false)
   }, [])
 
+  const editButtonClick = () => {
+    setEditing((prevState) => !prevState)
+  }
+
   return (
     <AuthPageWrapper className={classes.content}>
       <Spinner loading={loadingMovies} />
@@ -121,6 +126,9 @@ const Library = () => {
           onSortOrderChange={sortOrderChange}
           sortAscending={sortAscending}
           hideFilters={hideFilters}
+          forCollections={true}
+          editing={editing}
+          onEditClick={editButtonClick}
         />
         <div className={classes.movies}>
           <Movies
@@ -128,6 +136,8 @@ const Library = () => {
             showType={showType}
             sortBy={sorting}
             ascending={sortAscending}
+            editing={editing}
+            collection={collection}
           />
         </div>
       </div>

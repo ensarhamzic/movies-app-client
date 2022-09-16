@@ -96,3 +96,36 @@
 .overview {
   margin: 0;
 }
+
+.removeButton {
+  width: 130px;
+  height: 50px;
+  font-size: 1.5rem;
+  padding: 0px 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #df6c5e;
+}
+
+.removeButton:hover {
+  background-color: #bd5a4c;
+}
+
+.removeButton span {
+  font-size: 1rem;
+  margin-left: 10px;
+}
+
+.coverRemoveButton {
+  position: absolute;
+}
+
+.summaryRemoveButton {
+  position: absolute;
+  width: 115px;
+}
+
+.summaryRemoveButton span {
+  font-size: 0.9rem;
+}

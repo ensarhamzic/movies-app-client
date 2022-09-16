@@ -6,7 +6,6 @@ import Spinner from "../Spinner/Spinner"
 import CollectionHeader from "../CollectionHeader/CollectionHeader"
 import Movies from "../Movies/Movies"
 import Filters from "../Filters/Filters"
-import NotificationManager from "react-notifications/lib/NotificationManager"
 import { useParams } from "react-router-dom"
 
 const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
@@ -40,7 +39,6 @@ const Published = () => {
   const { sendRequest: getMovieDetails } = useHttp()
   const {
     isLoading: collectionsLoading,
-    error: collectionsError,
     sendRequest: getPublishedCollections,
   } = useHttp()
 
@@ -61,11 +59,6 @@ const Published = () => {
       setCollections(response.map((c) => c.collection))
     })()
   }, [getPublishedCollections, name])
-
-  // useEffect(() => {
-  //   collectionsError &&
-  //     NotificationManager.error(collectionsError, "Error!", 2000)
-  // }, [collectionsError])
 
   const sortOrderChange = () => {
     setSortAscending((prevSort) => !prevSort)
@@ -118,13 +111,6 @@ const Published = () => {
   const hideFilters = useCallback(() => {
     setFiltersShowed(false)
   }, [])
-
-  // if (collectionsError)
-  //   return (
-  //     <div>
-  //       <div></div>
-  //     </div>
-  //   )
 
   return (
     <div className={classes.content}>

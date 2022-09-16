@@ -15,6 +15,7 @@ const Favorites = () => {
   const favorites = useSelector((state) => state.favorites.data)
   const [filtersShowed, setFiltersShowed] = useState(false)
   const [filtersHiding, setFiltersHiding] = useState(false)
+  const [editing, setEditing] = useState(false)
 
   const { value: showType, onChange: onShowTypeChange } = useInput(
     null,
@@ -73,6 +74,10 @@ const Favorites = () => {
     setFiltersShowed(false)
   }, [])
 
+  const editButtonClick = () => {
+    setEditing((prevState) => !prevState)
+  }
+
   return (
     <AuthPageWrapper className={classes.content}>
       <Spinner loading={loadingMovies} />
@@ -95,7 +100,9 @@ const Favorites = () => {
           onSortOrderChange={sortOrderChange}
           sortAscending={sortAscending}
           hideFilters={hideFilters}
-          favorites={true}
+          forFavorites={true}
+          editing={editing}
+          onEditClick={editButtonClick}
         />
         <div className={classes.movies}>
           <Movies
@@ -103,6 +110,8 @@ const Favorites = () => {
             showType={showType}
             sortBy={sorting}
             ascending={sortAscending}
+            editing={editing}
+            forFavorites={true}
           />
         </div>
       </div>
