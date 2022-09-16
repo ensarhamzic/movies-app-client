@@ -1,5 +1,5 @@
 import classes from "./App.module.css"
-import { Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route, Navigate, useLocation } from "react-router-dom"
 import Navigation from "./components/Navigation/Navigation"
 import { useSelector } from "react-redux"
 import Navbar from "./components/Navbar/Navbar"
@@ -19,10 +19,13 @@ import { favoritesActions } from "./store/favorites-slice"
 import Library from "./pages/Library/Library"
 import { genresActions } from "./store/genres-slice"
 import Publish from "./pages/Publish/Publish"
+import Favorites from "./pages/Favorites/Favorites"
+import Published from "./components/Published/Published"
 
 const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
 const App = () => {
+  const location = useLocation()
   const dispatch = useDispatch()
   const isAuth = useSelector((state) => state.auth.isAuth)
   const authToken = useSelector((state) => state.auth.token)
@@ -109,6 +112,13 @@ const App = () => {
     }
   }, [isAuth, getFavorites, authToken, dispatch])
 
+  if (location.pathname.startsWith("/u/"))
+    return (
+      <Routes>
+        <Route path="/u/:name" element={<Published />} />
+      </Routes>
+    )
+
   return (
     <>
       <Spinner
@@ -132,6 +142,7 @@ const App = () => {
             <Route path="/login" element={<Navigate to="/library" />} />
             <Route path="/register" element={<Navigate to="/library" />} />
             <Route path="/library" element={<Library />} />
+            <Route path="/favorites" element={<Favorites />} />
             <Route path="/add-collection" element={<AddCollection />} />
             <Route path="/add-items" element={<AddItems />} />
             <Route path="/publish" element={<Publish />} />
@@ -141,8 +152,8 @@ const App = () => {
 
       {!isAuth && (
         <div>
-          <div className={classes.backgroundDiv} />
           <Navbar />
+          <div className={classes.backgroundDiv} />
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

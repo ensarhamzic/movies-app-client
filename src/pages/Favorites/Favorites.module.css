@@ -1,0 +1,27 @@
+.content {
+  display: flex;
+}
+
+.mainContent {
+  transition: all 300ms;
+  flex-grow: 1;
+  margin-right: 0;
+}
+
+.reduced {
+  margin-right: 260px;
+}
+
+.filtersHiding {
+  animation-duration: 300ms;
+  animation-name: filterHideAnimation !important;
+}
+
+@keyframes filterHideAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(260px);
+  }
+}

@@ -91,6 +91,7 @@ const Publish = () => {
         "Error",
         2000
       )
+      return
     }
     const data = {
       collectionIds: selectedCollections.map((c) => c.value),

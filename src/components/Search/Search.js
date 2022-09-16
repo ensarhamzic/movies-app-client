@@ -43,7 +43,10 @@ const Search = ({ movies, onSearch, active, onClose, value, onChange }) => {
   return (
     <>
       <div className={classes.search}>
-        <GrSearch className={classes.searchIcon} />
+        {!active && <GrSearch className={classes.searchIcon} />}
+        {active && (
+          <GrClose className={classes.closeSearch} onClick={onClose} />
+        )}
         <Form onSubmit={searchHandler} className={classes.searchForm}>
           <Input
             type="text"
@@ -54,9 +57,6 @@ const Search = ({ movies, onSearch, active, onClose, value, onChange }) => {
             onBlur={searchBlurHandler}
           />
         </Form>
-        {active && (
-          <GrClose className={classes.closeSearch} onClick={onClose} />
-        )}
       </div>
       {searchFocused && (
         <Card className={classes.searchInstructions}>

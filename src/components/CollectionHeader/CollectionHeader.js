@@ -37,6 +37,8 @@ const CollectionHeader = ({
   onSortOrderChange,
   sortAscending,
   hideFilters,
+  favorites = false,
+  customCollections = null,
 }) => {
   const collections = useSelector((state) => state.collections.data)
   const [choosenLetter, setChoosenLetter] = useState("ALL")
@@ -129,13 +131,16 @@ const CollectionHeader = ({
         onChange={onSearchQueryChange}
       />
       <div className={classes.headerActions}>
-        <Select
-          value={collection}
-          onChange={collectionChanged}
-          options={collections}
-          className={classes.collectionSelect}
-          placeholder="--- Choose Collection ---"
-        />
+        {!favorites && (
+          <Select
+            value={collection}
+            onChange={collectionChanged}
+            options={customCollections || collections}
+            className={classes.collectionSelect}
+            placeholder="--- Choose Collection ---"
+          />
+        )}
+        {favorites && <div className={classes.favoritesTitle}>Favorites</div>}
         <Select
           value={showType}
           onChange={onShowTypeChange}
