@@ -18,13 +18,16 @@
   margin-top: 30px;
 }
 
-.input,
-.select {
-  width: 100%;
+.select,
+.input {
   margin-top: 30px;
 }
 
-.input input,
+.select {
+  width: 100%;
+}
+
+.input,
 .select select {
   width: 60%;
 }
@@ -45,4 +48,9 @@
 
 .noCollections {
   font-size: 1.5rem;
+}
+
+.genresSelect {
+  margin-top: 20px;
+  width: 60%;
 }

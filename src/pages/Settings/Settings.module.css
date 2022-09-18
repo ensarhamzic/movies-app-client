@@ -1,0 +1,100 @@
+.header {
+  font-size: 2.5rem;
+}
+
+.content hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #dedede;
+  margin: 1em 0;
+  padding: 0;
+}
+
+.card {
+  width: 60%;
+  box-shadow: none;
+  border: 1px solid #dedede;
+  margin-top: 30px;
+}
+
+.cardTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.cardTitle p {
+  margin: 0;
+}
+
+.collapsedContent {
+  transition: height 300ms;
+}
+
+.select {
+  width: 60%;
+}
+
+.collapse {
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  padding-top: 30px;
+}
+
+.innerContent {
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.actionButton {
+  font-size: 1rem;
+  margin-left: 20px;
+  height: 40px;
+}
+
+.warning {
+  color: #ec7d78;
+  font-size: 1.3rem;
+  font-weight: bold;
+  font-style: italic;
+  padding: 10px;
+  border: 1px solid #ec7d78;
+  text-align: center;
+  width: 500px;
+  margin: 0;
+}
+
+.cancelButton,
+.deleteCollectionButton {
+  margin-left: 20px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #df6c5e;
+}
+
+.deleteCollectionButton {
+  font-size: 1rem;
+}
+
+.cancelButton:hover,
+.deleteCollectionButton:hover {
+  background-color: #bd5a4c;
+}
+
+.nameInput {
+  width: 60%;
+  height: 40px !important;
+  font-size: 1rem;
+  padding: 0 20px;
+}

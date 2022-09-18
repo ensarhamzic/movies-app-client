@@ -13,6 +13,7 @@ import Spinner from "../../components/Spinner/Spinner"
 import InfiniteScroll from "react-infinite-scroll-component"
 import { useCallback } from "react"
 import MoviesList from "../../components/MoviesList/MoviesList"
+import ReactSelect from "react-select"
 
 const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
@@ -20,11 +21,13 @@ const AddItems = () => {
   const collections = useSelector((state) => state.collections.data)
   const genres = useSelector((state) => state.genres.data)
   const [movies, setMovies] = useState([])
+  const [movieGenres, setMovieGenres] = useState([])
+  const [moviesLoading, setMoviesLoading] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [hasMore, setHasMore] = useState(false)
   const [currentMovieName, setCurrentMovieName] = useState("")
-  const { isLoading: moviesLoading, sendRequest: searchMovies } = useHttp()
+  const { sendRequest: searchMovies } = useHttp()
   const { value: choosenCollection, onChange: onCollectionChange } = useInput()
 
   const {
@@ -48,20 +51,46 @@ const AddItems = () => {
   }
 
   const searchMoviesHelper = useCallback(async () => {
-    const response = await searchMovies({
-      url: `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${currentMovieName}&page=${currentPage}&include_adult=false`,
-      method: "GET",
-      defaultAPI: false,
-    })
-
-    if (!response) return
-    let newMovies = response.results.filter((m) => {
-      let movieExists = false
-      movies.forEach((mov) => {
-        if (mov.id === m.id) movieExists = true
+    let newMovies = []
+    let pageNumber = currentPage
+    while (newMovies.length === 0) {
+      setMoviesLoading(true)
+      const response = await searchMovies({
+        url: `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${currentMovieName}&page=${pageNumber}&include_adult=false`,
+        method: "GET",
+        defaultAPI: false,
       })
-      return !movieExists
-    })
+
+      if (!response) return
+
+      console.log(response)
+
+      const selectedMovieGenres = movieGenres.map((g) => g.value)
+      newMovies = response.results.filter((m) => {
+        let genreMatches = false
+        const movieExists = movies.some((mov) => mov.id === m.id)
+
+        if (movieGenres.length > 0) {
+          genreMatches = m.genre_ids.some(
+            (g) => selectedMovieGenres.indexOf(g) >= 0
+          )
+          return !movieExists && genreMatches
+        }
+
+        return !movieExists
+      })
+
+      pageNumber++
+
+      if (pageNumber > response.total_pages) {
+        setHasMore(false)
+        break
+      } else {
+        setHasMore(true)
+      }
+    }
+
+    setMoviesLoading(false)
 
     const getGenreById = (id) => {
       return genres.find((g) => g.id === id)
@@ -72,14 +101,9 @@ const AddItems = () => {
       return { ...m, genres: newGenres }
     })
 
+    setCurrentPage(pageNumber)
     setMovies((prevMovies) => [...prevMovies, ...newMovies])
-    if (currentPage >= response.total_pages) {
-      setHasMore(false)
-    } else {
-      setHasMore(true)
-      setCurrentPage((prevPage) => prevPage + 1)
-    }
-  }, [currentPage, currentMovieName, searchMovies, movies, genres])
+  }, [currentPage, currentMovieName, searchMovies, movies, genres, movieGenres])
 
   const moviesLength = movies.length
   useEffect(() => {
@@ -95,6 +119,10 @@ const AddItems = () => {
     if (currentPage === 1) return
     await searchMoviesHelper()
   }
+
+  const genresOptions = genres.map((g) => {
+    return { label: g.name, value: g.id }
+  })
 
   return (
     <AuthPageWrapper className={classes.content}>
@@ -123,6 +151,16 @@ const AddItems = () => {
         </p>
       )}
       <Form onSubmit={searchMoviesHandler}>
+        <label className={classes.label}>
+          Search for specific movie genres
+        </label>
+        <ReactSelect
+          className={classes.genresSelect}
+          options={genresOptions}
+          value={movieGenres}
+          onChange={setMovieGenres}
+          isMulti={true}
+        />
         <label className={classes.label}>Search For Movies</label>
         <Input
           className={classes.input}

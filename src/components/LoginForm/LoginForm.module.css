@@ -1,11 +1,13 @@
 .form input {
   width: 330px;
-}
-
-.form div {
   margin-top: 20px;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .submitBtn {
   margin-top: 20px;
   width: 100%;

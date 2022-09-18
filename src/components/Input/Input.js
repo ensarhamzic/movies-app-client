@@ -27,17 +27,16 @@ const Input = ({
     error && (blurred || submitted) && classes.error
   } ${className || ""}`
   return (
-    <div className={wrapperClasses}>
-      <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        onFocus={focusHandler}
-        onBlur={blurHandler}
-        disabled={disabled}
-      />
-    </div>
+    <input
+      className={wrapperClasses}
+      type={type}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      onFocus={focusHandler}
+      onBlur={blurHandler}
+      disabled={disabled}
+    />
   )
 }
 

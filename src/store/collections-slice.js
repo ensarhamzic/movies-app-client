@@ -17,7 +17,7 @@ const collectionsSlice = createSlice({
     },
     removeCollection: (state, action) => {
       const collectionIndex = state.data.findIndex(
-        (c) => c.id === action.payload.collectionId
+        (c) => c.id === action.payload.id
       )
       state.data.splice(collectionIndex, 1)
     },
@@ -38,6 +38,12 @@ const collectionsSlice = createSlice({
       } else {
         state.data[collectionIndex].movies.splice(movieIndex, 1)
       }
+    },
+    renameCollection: (state, action) => {
+      const collectionIndex = state.data.findIndex(
+        (c) => c.id === action.payload.id
+      )
+      state.data[collectionIndex].name = action.payload.name
     },
   },
 })

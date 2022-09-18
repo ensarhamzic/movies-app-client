@@ -5,7 +5,7 @@ import Input from "../Input/Input"
 import useInput from "../../hooks/use-input"
 import Button from "../Button/Button"
 import { useSelector } from "react-redux"
-import { MultiSelect } from "react-multi-select-component"
+import ReactSelect from "react-select"
 import NotificationManager from "react-notifications/lib/NotificationManager"
 
 const Filters = ({ className, onFiltersApply, appliedFilters }) => {
@@ -123,12 +123,12 @@ const Filters = ({ className, onFiltersApply, appliedFilters }) => {
       </div>
       <div className={classes.genresFilter}>
         <label className={classes.filterLabel}>Filter by genres</label>
-        <MultiSelect
+        <ReactSelect
           className={classes.genresSelect}
           options={genresOptions}
           value={selectedGenres}
           onChange={setSelectedGenres}
-          labelledBy="Select"
+          isMulti={true}
         />
       </div>
       <Button className={classes.applyButton} onClick={applyFilters}>

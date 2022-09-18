@@ -1,4 +1,4 @@
-.wrapper input {
+.wrapper {
   height: 40px;
   font-size: 1.3rem;
   border: 2px solid #bad7e3;
@@ -7,10 +7,10 @@
   padding: 5px 20px;
 }
 
-.wrapper input:focus {
+.wrapper:focus {
   border-color: #93a7af !important;
 }
 
-.error input {
+.error {
   border-color: #df6c5e;
 }

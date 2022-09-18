@@ -9,7 +9,7 @@ import useHttp from "../../hooks/use-http"
 import { useSelector } from "react-redux"
 import NotificationManager from "react-notifications/lib/NotificationManager"
 import Spinner from "../../components/Spinner/Spinner"
-import { MultiSelect } from "react-multi-select-component"
+import ReactSelect from "react-select"
 
 const validateName = (name) => {
   if (name.length === 0) return "Name cannot be empty"
@@ -138,6 +138,7 @@ const Publish = () => {
           value={nameValue}
           onChange={onNameChange}
           error={nameValueError}
+          className={classes.urlInput}
         />
         <Button className={classes.submitBtn} type="submit">
           Change Url
@@ -146,12 +147,12 @@ const Publish = () => {
 
       <Form onSubmit={publishHandler}>
         <label className={classes.label}>Select collections to publish</label>
-        <MultiSelect
+        <ReactSelect
           className={classes.multiSelect}
           options={options}
           value={selectedCollections}
           onChange={setSelectedCollections}
-          labelledBy="Select"
+          isMulti={true}
         />
         <Button className={classes.submitBtn} type="submit">
           Publish
