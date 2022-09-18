@@ -123,8 +123,6 @@ const AddItems = () => {
     return { label: g.name, value: g.id }
   })
 
-  console.log(choosenCollection)
-
   return (
     <AuthPageWrapper className={classes.content}>
       <Spinner loading={moviesLoading} className={classes.spinner} />
