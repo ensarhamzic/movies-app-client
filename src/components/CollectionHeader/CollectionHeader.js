@@ -9,6 +9,7 @@ import { BsFilter } from "react-icons/bs"
 import useInput from "../../hooks/use-input"
 import { useSelector } from "react-redux"
 import { AiOutlineEdit, AiOutlineStop } from "react-icons/ai"
+import Selector from "../Selector/Selector"
 
 const showTypeOptions = [
   { id: "Cover", name: "Cover" },
@@ -136,12 +137,10 @@ const CollectionHeader = ({
       />
       <div className={classes.headerActions}>
         {!forFavorites && (
-          <Select
+          <Selector
+            options={customCollections || collections}
             value={collection}
             onChange={collectionChanged}
-            options={customCollections || collections}
-            className={classes.collectionSelect}
-            placeholder="--- Choose Collection ---"
           />
         )}
         {forFavorites && (
