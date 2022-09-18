@@ -18,22 +18,14 @@
   margin-top: 30px;
 }
 
-.select,
-.input {
+.input,
+.select {
+  width: 60%;
   margin-top: 30px;
 }
 
 .select {
-  width: 100%;
-}
-
-.input,
-.select select {
-  width: 60%;
-}
-
-.select select {
-  height: 50px !important;
+  font-size: 1.4rem;
 }
 
 .description {

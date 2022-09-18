@@ -28,7 +28,8 @@ const AddItems = () => {
   const [hasMore, setHasMore] = useState(false)
   const [currentMovieName, setCurrentMovieName] = useState("")
   const { sendRequest: searchMovies } = useHttp()
-  const { value: choosenCollection, onChange: onCollectionChange } = useInput()
+  const [choosenCollection, setChoosenCollection] = useState(null)
+  // const { value: choosenCollection, onChange: onCollectionChange } = useInput()
 
   const {
     value: movieNameValue,
@@ -62,8 +63,6 @@ const AddItems = () => {
       })
 
       if (!response) return
-
-      console.log(response)
 
       const selectedMovieGenres = movieGenres.map((g) => g.value)
       newMovies = response.results.filter((m) => {
@@ -124,6 +123,8 @@ const AddItems = () => {
     return { label: g.name, value: g.id }
   })
 
+  console.log(choosenCollection)
+
   return (
     <AuthPageWrapper className={classes.content}>
       <Spinner loading={moviesLoading} className={classes.spinner} />
@@ -132,12 +133,13 @@ const AddItems = () => {
       {collections.length > 0 && (
         <>
           <label className={classes.label}>Select Collection</label>
-          <Select
-            options={collections}
+          <ReactSelect
+            options={collections.map((c) => {
+              return { label: c.name, value: c.id }
+            })}
             className={classes.select}
             value={choosenCollection}
-            onChange={onCollectionChange}
-            placeholder="--- Choose Collection ---"
+            onChange={setChoosenCollection}
           />
           <p className={classes.description}>
             Choose the collection you're adding items to. Don't need to select
@@ -189,7 +191,7 @@ const AddItems = () => {
           //   </p>
           // }
         >
-          <MoviesList movies={movies} collection={choosenCollection} />
+          <MoviesList movies={movies} collection={choosenCollection.value} />
         </InfiniteScroll>
       )}
     </AuthPageWrapper>
