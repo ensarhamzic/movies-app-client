@@ -57,7 +57,10 @@ const Selector = ({ className, value, onChange, options }) => {
           setFocused((prevState) => !prevState)
         }}
       >
-        {currentCollection?.name || "--Select Collection--"}
+        <div className={classes.collectionName}>
+          {currentCollection?.name || "--Select Collection--"}
+        </div>
+
         {focused && <RiArrowDownSLine />}
         {!focused && <RiArrowRightSLine />}
       </div>

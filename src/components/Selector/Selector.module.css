@@ -3,7 +3,6 @@
   background-color: #eeeeef;
   font-size: 2rem;
   font-weight: bold;
-  height: 60px;
   border-radius: 7px;
 }
 
@@ -20,10 +19,16 @@
   align-items: center;
 }
 
+.collectionName {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 80%;
+}
+
 .focusedContent {
   display: flex;
   flex-direction: column;
-  position: relative;
   background-color: #eeeeef;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -49,4 +54,18 @@
 
 .searchResult:hover {
   background-color: #d6d6d6;
+}
+
+@media only screen and (max-width: 400px) {
+  .mainContent {
+    font-size: 1.3rem;
+  }
+
+  .searchResult {
+    font-size: 1rem;
+  }
+
+  .search {
+    height: 20px;
+  }
 }

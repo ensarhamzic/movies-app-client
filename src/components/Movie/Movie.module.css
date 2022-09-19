@@ -36,6 +36,7 @@
 
 .listMovieDetails {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .listMovieDetails p {
@@ -79,6 +80,7 @@
 
 .summaryMovieDetails {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .summaryMovieDetails p {
@@ -128,4 +130,32 @@
 
 .summaryRemoveButton span {
   font-size: 0.9rem;
+}
+
+@media only screen and (max-width: 1400px) {
+  .summaryMovie {
+    margin: 20px auto;
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .summaryMovie {
+    margin: 20px auto;
+    width: 90%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .summaryLeft img {
+    width: 190px;
+    height: 285px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .coverMovie img {
+    width: 190px;
+    height: 285px;
+  }
 }

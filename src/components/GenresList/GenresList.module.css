@@ -1,11 +1,13 @@
 .genres {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .genres p {
   background-color: #ececec;
   padding: 5px;
-  margin-left: 10px;
+  margin-left: 5px;
   border-radius: 10px;
   font-size: 0.9rem;
 }

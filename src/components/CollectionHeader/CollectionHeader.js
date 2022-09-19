@@ -141,10 +141,15 @@ const CollectionHeader = ({
             options={customCollections || collections}
             value={collection}
             onChange={collectionChanged}
+            className={classes.collectionName}
           />
         )}
         {forFavorites && (
-          <div className={classes.favoritesTitle}>Favorites</div>
+          <div
+            className={`${classes.favoritesTitle} ${classes.collectionName}`}
+          >
+            Favorites
+          </div>
         )}
 
         <Select

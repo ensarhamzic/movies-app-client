@@ -57,20 +57,20 @@ const Search = ({ movies, onSearch, active, onClose, value, onChange }) => {
             onBlur={searchBlurHandler}
           />
         </Form>
+        {searchFocused && (
+          <Card className={classes.searchInstructions}>
+            <p>Search for movies by typing at least one letter</p>
+            <p>
+              Start your search with <mark>r:</mark> or <mark>R:</mark> to
+              search for specific movies rating
+            </p>
+            <p>
+              Start your search with <mark>g:</mark> or <mark>G:</mark> to
+              search for specific movies genre
+            </p>
+          </Card>
+        )}
       </div>
-      {searchFocused && (
-        <Card className={classes.searchInstructions}>
-          <p>Search for movies by typing at least one letter</p>
-          <p>
-            Start your search with <mark>r:</mark> or <mark>R:</mark> to search
-            for specific movies rating
-          </p>
-          <p>
-            Start your search with <mark>g:</mark> or <mark>G:</mark> to search
-            for specific movies genre
-          </p>
-        </Card>
-      )}
     </>
   )
 }

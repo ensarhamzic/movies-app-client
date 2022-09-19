@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux"
 import { authActions } from "../../store/auth-slice"
 import { useNavigate } from "react-router-dom"
 
-const NavigationList = () => {
+const NavigationList = ({ className }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -24,7 +24,7 @@ const NavigationList = () => {
   }
 
   return (
-    <div className={classes.list}>
+    <div className={`${classes.list} ${className || ""}`}>
       <NavigationItem
         icon={libraryIcon}
         alt="Library"

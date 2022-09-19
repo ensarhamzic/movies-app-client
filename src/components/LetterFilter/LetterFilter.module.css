@@ -1,11 +1,15 @@
 .letters {
   color: black;
   font-weight: 300;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .letters span {
   cursor: pointer;
   margin-left: 20px;
+  margin-top: 20px;
 }
 
 .choosen {

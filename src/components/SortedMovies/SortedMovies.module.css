@@ -22,3 +22,15 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+@media only screen and (max-width: 1400px) {
+  .summaryMovies {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .coverMovies {
+    justify-content: center;
+  }
+}

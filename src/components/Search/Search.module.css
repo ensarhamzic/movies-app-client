@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .searchIcon {
@@ -9,7 +10,7 @@
 }
 
 .searchForm {
-  width: 70%;
+  width: 80%;
 }
 
 .searchForm input {
@@ -33,5 +34,20 @@
 .searchInstructions {
   width: 500px;
   position: absolute;
-  top: 80px;
+  top: 60px;
+}
+
+@media only screen and (max-width: 600px) {
+  .searchInstructions {
+    width: 90%;
+  }
+
+  .search {
+    justify-content: center;
+  }
+
+  .searchForm input {
+    width: 80%;
+    font-size: 1rem;
+  }
 }
