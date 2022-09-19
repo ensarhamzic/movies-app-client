@@ -187,7 +187,7 @@ const AddItems = () => {
           //   </p>
           // }
         >
-          <MoviesList movies={movies} collection={choosenCollection.value} />
+          <MoviesList movies={movies} collection={choosenCollection?.value} />
         </InfiniteScroll>
       )}
     </AuthPageWrapper>

@@ -6,3 +6,14 @@
 .movies {
   width: 60%;
 }
+
+@media only screen and (max-width: 1500px) {
+  .movies {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .title {
+    text-align: center;
+  }
+}

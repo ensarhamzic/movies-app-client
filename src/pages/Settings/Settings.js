@@ -62,6 +62,11 @@ const Settings = () => {
 
     // renaming mode is activated here.. Button click should rename collection
 
+    if (collectionNameError) {
+      NotificationManager.error(collectionNameError, "Error!", 2000)
+      return
+    }
+
     const data = { id: selectedRenameCollection.value, name: collectionName }
     const response = await renameCollection({
       url: "/collections",

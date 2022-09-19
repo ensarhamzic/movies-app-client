@@ -32,3 +32,23 @@
     padding: 10px;
   }
 }
+
+@keyframes filterHideAnimationMobile {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .reduced {
+    margin-right: 0;
+  }
+
+  .filtersHiding {
+    animation-name: filterHideAnimationMobile !important;
+    animation-duration: 300ms;
+  }
+}

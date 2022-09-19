@@ -45,6 +45,7 @@
   padding: 30px;
   display: flex;
   align-items: center;
+  gap: 20px;
 }
 
 .content {
@@ -59,7 +60,6 @@
 
 .actionButton {
   font-size: 1rem;
-  margin-left: 20px;
   height: 40px;
 }
 
@@ -78,7 +78,6 @@
 
 .cancelButton,
 .deleteCollectionButton {
-  margin-left: 20px;
   height: 40px;
   display: flex;
   justify-content: center;
@@ -100,4 +99,31 @@
   height: 40px !important;
   font-size: 1rem;
   padding: 0 20px;
+}
+
+@media only screen and (max-width: 1300px) {
+  .card {
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  .collapse {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .warning {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .innerContent {
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .select,
+  .nameInput {
+    flex-grow: 1;
+  }
 }

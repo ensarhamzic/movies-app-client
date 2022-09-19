@@ -36,3 +36,13 @@
   font-size: 0.9rem;
   font-style: italic;
 }
+
+@media only screen and (max-width: 500px) {
+  .urlInput {
+    width: 80%;
+  }
+
+  .multiSelect {
+    width: 95%;
+  }
+}
