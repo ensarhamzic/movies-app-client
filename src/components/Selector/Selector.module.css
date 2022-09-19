@@ -3,7 +3,9 @@
   background-color: #eeeeef;
   font-size: 2rem;
   font-weight: bold;
+  height: 60px;
   border-radius: 7px;
+  z-index: 999;
 }
 
 .focusedWrapper {

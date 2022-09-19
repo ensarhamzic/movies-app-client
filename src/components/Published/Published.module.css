@@ -26,3 +26,9 @@
     transform: translateX(260px);
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .content {
+    padding: 10px;
+  }
+}
