@@ -10,6 +10,7 @@ const NavigationItem = ({
   className,
   button,
   onClick,
+  onLinkClick,
 }) => {
   if (!button)
     return (
@@ -18,6 +19,7 @@ const NavigationItem = ({
         className={(nav) =>
           `${classes.link} ${nav.isActive ? classes.active : ""} ${className}`
         }
+        onClick={onLinkClick}
       >
         <div className={classes.wrapper}>
           <div className={classes.item}>

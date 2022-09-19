@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux"
 import { authActions } from "../../store/auth-slice"
 import { useNavigate } from "react-router-dom"
 
-const NavigationList = ({ className }) => {
+const NavigationList = ({ className, onLinkClick }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -30,36 +30,42 @@ const NavigationList = ({ className }) => {
         alt="Library"
         title={"Library"}
         location="/library"
+        onLinkClick={onLinkClick}
       />
       <NavigationItem
         icon={favoritesIcon}
         alt="Favorites"
         title={"Favorites"}
         location="/favorites"
+        onLinkClick={onLinkClick}
       />
       <NavigationItem
         icon={addIcon}
         alt="Add Items"
         title={"Add Items"}
         location="/add-items"
+        onLinkClick={onLinkClick}
       />
       <NavigationItem
         icon={addCollectionIcon}
         alt="Add Collection"
         title={"Add Collection"}
         location="/add-collection"
+        onLinkClick={onLinkClick}
       />
       <NavigationItem
         icon={publishIcon}
         alt="Publish"
         title={"Publish"}
         location="/publish"
+        onLinkClick={onLinkClick}
       />
       <NavigationItem
         icon={dashboardIcon}
         alt="Dashboards"
         title={"Dashboards"}
         location="/dashboards"
+        onLinkClick={onLinkClick}
       />
       <NavigationItem
         className={classes.separate}
@@ -67,12 +73,14 @@ const NavigationList = ({ className }) => {
         alt="Settings"
         title={"Settings"}
         location="/settings"
+        onLinkClick={onLinkClick}
       />
       <NavigationItem
         icon={supportIcon}
         alt="Support"
         title={"Support"}
         location="/support"
+        onLinkClick={onLinkClick}
       />
       <NavigationItem
         icon={logoutIcon}
@@ -80,6 +88,7 @@ const NavigationList = ({ className }) => {
         title={"Logout"}
         button={true}
         onClick={logoutClickHandler}
+        onLinkClick={onLinkClick}
       />
     </div>
   )

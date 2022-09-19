@@ -8,7 +8,12 @@ import { useSelector } from "react-redux"
 import ReactSelect from "react-select"
 import NotificationManager from "react-notifications/lib/NotificationManager"
 
-const Filters = ({ className, onFiltersApply, appliedFilters }) => {
+const Filters = ({
+  className,
+  onFiltersApply,
+  appliedFilters,
+  hideFilters,
+}) => {
   const genres = useSelector((state) => state.genres.data)
 
   const [minRating, setMinRating] = useState(
@@ -87,11 +92,10 @@ const Filters = ({ className, onFiltersApply, appliedFilters }) => {
     <div className={`${classes.content} ${className || ""}`}>
       <div className={classes.header}>
         <p>Filters</p>
-        {appliedFilters && (
-          <Button className={classes.clearButton} onClick={clearFilters}>
-            Clear All
-          </Button>
-        )}
+
+        <Button className={classes.clearButton} onClick={hideFilters}>
+          Close
+        </Button>
       </div>
       <hr />
       <div>
@@ -131,9 +135,16 @@ const Filters = ({ className, onFiltersApply, appliedFilters }) => {
           isMulti={true}
         />
       </div>
-      <Button className={classes.applyButton} onClick={applyFilters}>
-        Apply filters
-      </Button>
+      <div className={classes.buttons}>
+        <Button className={classes.applyButton} onClick={applyFilters}>
+          Apply filters
+        </Button>
+        {appliedFilters && (
+          <Button className={classes.clearButton} onClick={clearFilters}>
+            Clear All
+          </Button>
+        )}
+      </div>
     </div>
   )
 }

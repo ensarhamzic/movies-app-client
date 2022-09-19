@@ -32,6 +32,9 @@ const Navigation = () => {
     }
   }, [])
 
+  const linkClickHandler = () => {
+    if (mobileView) setOpened(false)
+  }
   return (
     <div className={`${classes.nav} ${opened && classes.navOpened}`}>
       <div className={classes.header}>
@@ -50,7 +53,10 @@ const Navigation = () => {
       </div>
       {(!mobileView || (mobileView && opened)) && (
         <>
-          <NavigationList className={classes.navigationList} />
+          <NavigationList
+            className={classes.navigationList}
+            onLinkClick={linkClickHandler}
+          />
           <Button className={classes.upgradeBtn}>Upgrade</Button>
           <SocialBar />
         </>

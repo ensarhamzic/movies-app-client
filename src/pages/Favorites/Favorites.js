@@ -53,13 +53,17 @@ const Favorites = () => {
     })()
   }, [favorites, getMovieDetails])
 
+  const animateFiltersHiding = () => {
+    setFiltersHiding(true)
+    setFiltersShowed(false)
+    setTimeout(() => {
+      setFiltersHiding(false)
+    }, 300)
+  }
+
   const filtersButtonClick = () => {
     if (filtersShowed) {
-      setFiltersHiding(true)
-      setFiltersShowed(false)
-      setTimeout(() => {
-        setFiltersHiding(false)
-      }, 300)
+      animateFiltersHiding()
     } else {
       setFiltersShowed(true)
     }
@@ -120,6 +124,7 @@ const Favorites = () => {
           className={filtersHiding && classes.filtersHiding}
           onFiltersApply={setFilters}
           appliedFilters={filters}
+          hideFilters={animateFiltersHiding}
         />
       )}
     </AuthPageWrapper>

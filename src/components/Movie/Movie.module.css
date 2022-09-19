@@ -81,10 +81,11 @@
 .summaryMovieDetails {
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
 .summaryMovieDetails p {
-  margin-left: 20px;
+  margin: 5px 0px;
 }
 
 .summaryMovieDetails p:first-of-type {

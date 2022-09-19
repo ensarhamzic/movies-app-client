@@ -3,9 +3,9 @@
   background-color: #eeeeef;
   font-size: 2rem;
   font-weight: bold;
-  height: 60px;
+  height: auto;
   border-radius: 7px;
-  z-index: 999;
+  z-index: 9;
 }
 
 .focusedWrapper {
@@ -22,10 +22,7 @@
 }
 
 .collectionName {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 80%;
+  width: 100%;
 }
 
 .focusedContent {
@@ -69,5 +66,13 @@
 
   .search {
     height: 20px;
+  }
+
+  .focusedWrapper {
+    position: relative;
+  }
+
+  .focusedContent {
+    position: absolute;
   }
 }
