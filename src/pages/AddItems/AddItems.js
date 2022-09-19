@@ -4,7 +4,6 @@ import Form from "../../components/Form/Form"
 import useHttp from "../../hooks/use-http"
 import classes from "./AddItems.module.css"
 import { useSelector } from "react-redux"
-import Select from "../../components/Select/Select"
 import useInput from "../../hooks/use-input"
 import Input from "../../components/Input/Input"
 import Button from "../../components/Button/Button"
@@ -29,7 +28,6 @@ const AddItems = () => {
   const [currentMovieName, setCurrentMovieName] = useState("")
   const { sendRequest: searchMovies } = useHttp()
   const [choosenCollection, setChoosenCollection] = useState(null)
-  // const { value: choosenCollection, onChange: onCollectionChange } = useInput()
 
   const {
     value: movieNameValue,

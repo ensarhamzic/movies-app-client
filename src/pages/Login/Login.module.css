@@ -18,7 +18,7 @@
 .header {
   display: flex;
   align-self: flex-start;
-  margin-left: 50px;
+  margin: 0 auto;
 }
 
 .header img {
@@ -34,4 +34,14 @@
 .footer {
   padding: 10px;
   font-weight: 300;
+}
+
+@media only screen and (max-width: 550px) {
+  .card {
+    width: 85%;
+    position: unset;
+    transform: unset;
+    margin-top: 50px;
+    margin-bottom: 100px;
+  }
 }

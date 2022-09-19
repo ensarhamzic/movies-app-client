@@ -6,7 +6,7 @@ import classes from "./Navbar.module.css"
 const Navbar = () => {
   return (
     <div className={classes.navbar}>
-      <Logo />
+      <Logo className={classes.logo} />
       <div className={classes.actions}>
         <NavLink
           className={(nav) => (nav.isActive ? classes.active : "")}

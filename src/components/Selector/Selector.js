@@ -16,7 +16,10 @@ const Selector = ({ className, value, onChange, options }) => {
     setValue: setSearchQuery,
   } = useInput()
   useOutsideClickEvent(wrapperRef, () => {
-    setFocused(false)
+    if (focused) {
+      setFocused(false)
+      setSearchQuery("")
+    }
   })
 
   const currentCollection = options.find((c) => c.id === value)

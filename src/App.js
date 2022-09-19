@@ -159,6 +159,22 @@ const App = () => {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            {[
+              "/library",
+              "/favorites",
+              "/add-collection",
+              "/add-items",
+              "/publish",
+              "/settings",
+            ].map((path, index) => {
+              return (
+                <Route
+                  path={path}
+                  element={<Navigate to="/login" />}
+                  key={index}
+                />
+              )
+            })}
           </Routes>
         </div>
       )}

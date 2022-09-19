@@ -26,3 +26,22 @@
 .active {
   color: #4bc1d2 !important;
 }
+
+@media only screen and (max-width: 500px) {
+  .navbar {
+    display: unset;
+  }
+
+  .logo {
+    margin: 30px auto;
+    justify-content: center;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  .actions a:first-of-type {
+    margin-left: 0;
+  }
+}
