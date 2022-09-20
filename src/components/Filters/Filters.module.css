@@ -110,7 +110,7 @@
     height: 100%;
     position: fixed;
     background-color: white;
-    z-index: 999;
+    z-index: 4;
     animation-name: showAnimationMobile;
   }
 

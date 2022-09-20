@@ -15,7 +15,6 @@ const Navigation = () => {
   }, [])
 
   useEffect(() => {
-    console.log("calling")
     const handleResize = () => {
       if (window.innerWidth <= 1024) {
         setMobileView(true)
