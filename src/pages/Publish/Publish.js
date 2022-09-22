@@ -10,6 +10,7 @@ import { useSelector } from "react-redux"
 import NotificationManager from "react-notifications/lib/NotificationManager"
 import Spinner from "../../components/Spinner/Spinner"
 import ReactSelect from "react-select"
+import ProfileButton from "../../components/ProfileButton/ProfileButton"
 
 const validateName = (name) => {
   if (name.length === 0) return "Name cannot be empty"
@@ -123,6 +124,7 @@ const Publish = () => {
 
   return (
     <AuthPageWrapper className={classes.content}>
+      <ProfileButton />
       <Spinner loading={changingUrl || publishing || gettingPublishUrl} />
       <h1 className={classes.header}>Publish personal page</h1>
       <hr />

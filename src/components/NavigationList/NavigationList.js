@@ -79,7 +79,7 @@ const NavigationList = ({ className, onLinkClick }) => {
         icon={supportIcon}
         alt="Support"
         title={"Support"}
-        location="/support"
+        button={true}
         onLinkClick={onLinkClick}
       />
       <NavigationItem

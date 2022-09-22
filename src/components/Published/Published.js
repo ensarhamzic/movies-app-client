@@ -7,6 +7,7 @@ import CollectionHeader from "../CollectionHeader/CollectionHeader"
 import Movies from "../Movies/Movies"
 import Filters from "../Filters/Filters"
 import { useParams } from "react-router-dom"
+import ProfileButton from "../ProfileButton/ProfileButton"
 
 const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
@@ -124,6 +125,7 @@ const Published = () => {
           filtersShowed ? classes.reduced : ""
         }`}
       >
+        <ProfileButton className={classes.profileButton} />
         <CollectionHeader
           collection={collection}
           choosenCollection={choosenCollection}

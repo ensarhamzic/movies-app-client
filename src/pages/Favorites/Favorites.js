@@ -8,6 +8,7 @@ import Filters from "../../components/Filters/Filters"
 import { useSelector } from "react-redux"
 import useHttp from "../../hooks/use-http"
 import useInput from "../../hooks/use-input"
+import ProfileButton from "../../components/ProfileButton/ProfileButton"
 
 const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
@@ -90,6 +91,7 @@ const Favorites = () => {
           filtersShowed ? classes.reduced : ""
         }`}
       >
+        <ProfileButton className={classes.profileButton} />
         <CollectionHeader
           movies={movies}
           onApplyFilter={setFilteredMovies}

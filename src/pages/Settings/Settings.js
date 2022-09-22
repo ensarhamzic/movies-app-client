@@ -17,6 +17,7 @@ import { useEffect } from "react"
 import { NotificationManager } from "react-notifications"
 import { collectionsActions } from "../../store/collections-slice"
 import { authActions } from "../../store/auth-slice"
+import ProfileButton from "../../components/ProfileButton/ProfileButton"
 
 const Settings = () => {
   const dispatch = useDispatch()
@@ -142,6 +143,7 @@ const Settings = () => {
 
   return (
     <AuthPageWrapper className={classes.content}>
+      <ProfileButton />
       <Spinner
         loading={renamingCollection || deletingCollection || deletingAccount}
       />

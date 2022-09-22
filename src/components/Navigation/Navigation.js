@@ -3,6 +3,7 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai"
 import Button from "../Button/Button"
 import Logo from "../Logo/Logo"
 import NavigationList from "../NavigationList/NavigationList"
+import ProfileButton from "../ProfileButton/ProfileButton"
 import SocialBar from "../SocialBar/SocialBar"
 import classes from "./Navigation.module.css"
 
@@ -56,6 +57,9 @@ const Navigation = () => {
             className={classes.navigationList}
             onLinkClick={linkClickHandler}
           />
+          {mobileView && opened && (
+            <ProfileButton mobile={true} onClick={linkClickHandler} />
+          )}
           <Button className={classes.upgradeBtn}>Upgrade</Button>
           <SocialBar />
         </>

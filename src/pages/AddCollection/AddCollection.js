@@ -10,6 +10,7 @@ import NotificationManager from "react-notifications/lib/NotificationManager"
 import { useDispatch, useSelector } from "react-redux"
 import AuthPageWrapper from "../../components/AuthPageWrapper/AuthPageWrapper"
 import { collectionsActions } from "../../store/collections-slice"
+import ProfileButton from "../../components/ProfileButton/ProfileButton"
 
 const validateCollectionName = (name) => {
   if (name.length >= 1 && name.length <= 50) return null
@@ -66,6 +67,7 @@ const AddCollection = () => {
 
   return (
     <AuthPageWrapper className={classes.content}>
+      <ProfileButton />
       <h1 className={classes.header}>Add Collection</h1>
       <hr />
       <p className={classes.newCollectionText}>Create New Collection</p>

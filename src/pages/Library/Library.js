@@ -11,6 +11,7 @@ import classes from "./Library.module.css"
 import Filters from "../../components/Filters/Filters"
 import CollectionHeader from "../../components/CollectionHeader/CollectionHeader"
 import { useCallback } from "react"
+import ProfileButton from "../../components/ProfileButton/ProfileButton"
 
 const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
@@ -114,6 +115,7 @@ const Library = () => {
           filtersShowed ? classes.reduced : ""
         }`}
       >
+        <ProfileButton className={classes.profileButton} />
         <CollectionHeader
           collection={collection}
           choosenCollection={choosenCollection}

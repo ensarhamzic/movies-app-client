@@ -10,7 +10,7 @@
 }
 
 .searchForm {
-  width: 80%;
+  width: 50%;
 }
 
 .searchForm input {
@@ -45,6 +45,10 @@
 
   .search {
     justify-content: center;
+  }
+
+  .searchForm {
+    width: 80%;
   }
 
   .searchForm input {

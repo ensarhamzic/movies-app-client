@@ -22,6 +22,7 @@ import Publish from "./pages/Publish/Publish"
 import Favorites from "./pages/Favorites/Favorites"
 import Published from "./components/Published/Published"
 import Settings from "./pages/Settings/Settings"
+import Profile from "./pages/Profile/Profile"
 
 const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
@@ -148,6 +149,7 @@ const App = () => {
             <Route path="/add-items" element={<AddItems />} />
             <Route path="/publish" element={<Publish />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>
       )}

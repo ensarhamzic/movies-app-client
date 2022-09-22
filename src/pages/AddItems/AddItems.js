@@ -13,6 +13,7 @@ import InfiniteScroll from "react-infinite-scroll-component"
 import { useCallback } from "react"
 import MoviesList from "../../components/MoviesList/MoviesList"
 import ReactSelect from "react-select"
+import ProfileButton from "../../components/ProfileButton/ProfileButton"
 
 const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
@@ -124,6 +125,7 @@ const AddItems = () => {
   return (
     <AuthPageWrapper className={classes.content}>
       <Spinner loading={moviesLoading} className={classes.spinner} />
+      <ProfileButton />
       <h1 className={classes.header}>Add Item To Collection</h1>
       <hr />
       {collections.length > 0 && (
