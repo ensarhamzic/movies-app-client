@@ -27,7 +27,7 @@
   padding: 10px;
   border: 1px solid #ec7d78;
   text-align: center;
-  width: 500px;
+  width: 90%;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -54,8 +54,28 @@
   gap: 20px;
 }
 
-@media only screen and (max-width: 1300px) {
-  .warning {
+.changePasswordContent,
+.changeNameContent {
+  padding: 20px;
+}
+
+.changePasswordContent form,
+.changeNameContent form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.changePasswordContent input,
+.changeNameContent input {
+  width: 300px;
+}
+
+@media only screen and (max-width: 500px) {
+  .changePasswordContent input,
+  .changeNameContent input {
     width: 90%;
   }
 }

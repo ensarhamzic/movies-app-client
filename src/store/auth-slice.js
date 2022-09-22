@@ -33,6 +33,13 @@ const authSlice = createSlice({
       state.user = { ...initialState.user }
       localStorage.removeItem("token")
     },
+    changeName: (state, action) => {
+      state.user = {
+        ...state.user,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+      }
+    },
   },
 })
 
