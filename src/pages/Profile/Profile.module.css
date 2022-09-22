@@ -15,6 +15,7 @@
   padding: 30px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
@@ -27,8 +28,8 @@
   border: 1px solid #ec7d78;
   text-align: center;
   width: 500px;
-  margin: 0;
-  margin-left: 20px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .deleteAccountButton {
@@ -44,14 +45,17 @@
   background-color: #bd5a4c;
 }
 
-@media only screen and (max-width: 1300px) {
-  .collapse {
-    flex-wrap: wrap;
-    gap: 20px;
-  }
+.deleteContent {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
 
+@media only screen and (max-width: 1300px) {
   .warning {
     width: 90%;
-    margin: 0 auto;
   }
 }
