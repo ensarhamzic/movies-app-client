@@ -11,7 +11,6 @@ import supportIcon from "../../images/support.svg"
 import logoutIcon from "../../images/logout.svg"
 import classes from "./NavigationList.module.css"
 import { useDispatch } from "react-redux"
-import { authActions } from "../../store/auth-slice"
 import { useNavigate } from "react-router-dom"
 
 const NavigationList = ({ className, onLinkClick }) => {
@@ -19,7 +18,7 @@ const NavigationList = ({ className, onLinkClick }) => {
   const dispatch = useDispatch()
 
   const logoutClickHandler = () => {
-    dispatch(authActions.logout())
+    dispatch({ type: "RESET" })
     navigate("/", { replace: true })
   }
 

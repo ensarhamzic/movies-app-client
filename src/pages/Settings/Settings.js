@@ -1,10 +1,7 @@
 import React from "react"
 import classes from "./Settings.module.css"
 import AuthPageWrapper from "../../components/AuthPageWrapper/AuthPageWrapper"
-import { Collapse } from "react-collapse"
 import { useState } from "react"
-import Card from "../../components/Card/Card"
-import { RiArrowDownSLine, RiArrowRightSLine } from "react-icons/ri"
 import ReactSelect from "react-select"
 import { useDispatch, useSelector } from "react-redux"
 import Button from "../../components/Button/Button"
@@ -16,8 +13,8 @@ import Spinner from "../../components/Spinner/Spinner"
 import { useEffect } from "react"
 import { NotificationManager } from "react-notifications"
 import { collectionsActions } from "../../store/collections-slice"
-import { authActions } from "../../store/auth-slice"
 import ProfileButton from "../../components/ProfileButton/ProfileButton"
+import CollapsingContent from "../../components/CollapsingContent/CollapsingContent"
 
 const Settings = () => {
   const dispatch = useDispatch()
@@ -28,7 +25,6 @@ const Settings = () => {
   )
   const token = useSelector((state) => state.auth.token)
 
-  const [renameOpened, setRenameOpened] = useState(false)
   const [renaming, setRenaming] = useState(false)
   const [selectedRenameCollection, setSelectedRenameCollection] = useState(null)
   const {
@@ -86,7 +82,6 @@ const Settings = () => {
     renameError && NotificationManager.error(renameError, "Error!", 2000)
   }, [renameError])
 
-  const [deleteCollectionOpened, setDeleteCollectionOpened] = useState(false)
   const [selectedDeleteCollection, setSelectedDeleteCollection] = useState(null)
   const {
     isLoading: deletingCollection,
@@ -125,151 +120,71 @@ const Settings = () => {
       NotificationManager.error(deleteCollectionError, "Error!", 2000)
   }, [deleteCollectionError])
 
-  const [deleteAccountOpened, setDeleteAccountOpened] = useState(false)
-  const { isLoading: deletingAccount, sendRequest: deleteAccount } = useHttp()
-
-  const deleteAccountHandler = async () => {
-    const response = await deleteAccount({
-      url: "/users",
-      method: "DELETE",
-      token,
-    })
-
-    if (!response) return
-
-    dispatch(authActions.logout())
-    NotificationManager.success(response.message, "Success!", 2000)
-  }
-
   return (
     <AuthPageWrapper className={classes.content}>
       <ProfileButton />
-      <Spinner
-        loading={renamingCollection || deletingCollection || deletingAccount}
-      />
+      <Spinner loading={renamingCollection || deletingCollection} />
       <h1 className={classes.header}>Settings</h1>
       <hr />
-      <Card className={classes.card}>
-        <div
-          className={classes.cardTitle}
-          onClick={() => {
-            setRenameOpened((prevState) => !prevState)
-          }}
-        >
-          <p>Rename Collections</p>
-          {renameOpened && <RiArrowDownSLine />}
-          {!renameOpened && <RiArrowRightSLine />}
-        </div>
-        <Collapse
-          isOpened={renameOpened}
-          theme={{
-            collapse: classes.collapsedContent,
-            content: classes.collapse,
-          }}
-        >
-          {!renaming && (
+      <CollapsingContent
+        title="Rename Collections"
+        contentClass={classes.collapse}
+      >
+        {!renaming && (
+          <ReactSelect
+            options={collections}
+            value={selectedRenameCollection}
+            onChange={setSelectedRenameCollection}
+            className={classes.select}
+          />
+        )}
+
+        {renaming && (
+          <Input
+            className={classes.nameInput}
+            value={collectionName}
+            onChange={onCollectionNameChange}
+            error={collectionNameError}
+          />
+        )}
+
+        <Button className={classes.actionButton} onClick={renameHandler}>
+          Rename
+        </Button>
+        {renaming && (
+          <Button
+            onClick={() => {
+              setRenaming(false)
+            }}
+            className={classes.cancelButton}
+          >
+            <AiOutlineClose />
+          </Button>
+        )}
+      </CollapsingContent>
+
+      <CollapsingContent title="Delete Collections">
+        <div className={classes.content}>
+          <p className={classes.warning}>
+            Collection will be deleted permanently!
+          </p>
+          <div className={classes.innerContent}>
             <ReactSelect
               options={collections}
-              value={selectedRenameCollection}
-              onChange={setSelectedRenameCollection}
+              value={selectedDeleteCollection}
+              onChange={setSelectedDeleteCollection}
               className={classes.select}
             />
-          )}
 
-          {renaming && (
-            <Input
-              className={classes.nameInput}
-              value={collectionName}
-              onChange={onCollectionNameChange}
-              error={collectionNameError}
-            />
-          )}
-
-          <Button className={classes.actionButton} onClick={renameHandler}>
-            Rename
-          </Button>
-          {renaming && (
             <Button
-              onClick={() => {
-                setRenaming(false)
-              }}
-              className={classes.cancelButton}
+              className={classes.deleteCollectionButton}
+              onClick={deleteCollectionHandler}
             >
-              <AiOutlineClose />
+              Delete
             </Button>
-          )}
-        </Collapse>
-      </Card>
-
-      <Card className={classes.card}>
-        <div
-          className={classes.cardTitle}
-          onClick={() => {
-            setDeleteCollectionOpened((prevState) => !prevState)
-          }}
-        >
-          <p>Delete Collections</p>
-          {deleteCollectionOpened && <RiArrowDownSLine />}
-          {!deleteCollectionOpened && <RiArrowRightSLine />}
-        </div>
-        <Collapse
-          isOpened={deleteCollectionOpened}
-          theme={{
-            collapse: classes.collapsedContent,
-          }}
-        >
-          <div className={classes.content}>
-            <p className={classes.warning}>
-              Collection will be deleted permanently!
-            </p>
-            <div className={classes.innerContent}>
-              <ReactSelect
-                options={collections}
-                value={selectedDeleteCollection}
-                onChange={setSelectedDeleteCollection}
-                className={classes.select}
-              />
-
-              <Button
-                className={classes.deleteCollectionButton}
-                onClick={deleteCollectionHandler}
-              >
-                Delete
-              </Button>
-            </div>
           </div>
-        </Collapse>
-      </Card>
-
-      <Card className={classes.card}>
-        <div
-          className={classes.cardTitle}
-          onClick={() => {
-            setDeleteAccountOpened((prevState) => !prevState)
-          }}
-        >
-          <p>Delete Account</p>
-          {deleteAccountOpened && <RiArrowDownSLine />}
-          {!deleteAccountOpened && <RiArrowRightSLine />}
         </div>
-        <Collapse
-          isOpened={deleteAccountOpened}
-          theme={{
-            collapse: classes.collapsedContent,
-            content: classes.collapse,
-          }}
-        >
-          <p className={classes.warning}>
-            Account will be deleted permanently!
-          </p>
-          <Button
-            className={classes.deleteCollectionButton}
-            onClick={deleteAccountHandler}
-          >
-            Delete My Account
-          </Button>
-        </Collapse>
-      </Card>
+      </CollapsingContent>
     </AuthPageWrapper>
   )
 }

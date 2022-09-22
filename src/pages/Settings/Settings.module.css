@@ -11,32 +11,6 @@
   padding: 0;
 }
 
-.card {
-  padding: 0;
-  width: 60%;
-  box-shadow: none;
-  border: 1px solid #dedede;
-  margin-top: 30px;
-}
-
-.cardTitle {
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.cardTitle p {
-  margin: 0;
-}
-
-.collapsedContent {
-  transition: height 300ms;
-}
-
 .select {
   width: 60%;
 }
@@ -54,6 +28,7 @@
 
 .innerContent {
   display: flex;
+  gap: 20px;
   align-items: center;
   padding: 20px;
 }
@@ -102,11 +77,6 @@
 }
 
 @media only screen and (max-width: 1300px) {
-  .card {
-    width: 90%;
-    margin: 20px auto;
-  }
-
   .collapse {
     flex-wrap: wrap;
     gap: 20px;

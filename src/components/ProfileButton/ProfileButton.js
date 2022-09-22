@@ -67,7 +67,7 @@ const ProfileButton = ({ className, mobile, onClick }) => {
         {detailsVisible && (
           <div className={classes.details}>
             <hr />
-            <Link to="/profile">
+            <Link to="/profile" className={classes.link}>
               Profile <RiArrowRightSLine />
             </Link>
             <hr />

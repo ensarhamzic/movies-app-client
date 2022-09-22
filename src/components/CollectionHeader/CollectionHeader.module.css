@@ -3,20 +3,6 @@
   flex-direction: column;
 }
 
-.collectionSelect {
-  width: 70%;
-}
-
-.collectionSelect select {
-  width: 100%;
-  height: 60px;
-  background-color: #eeeeef;
-  outline: none;
-  border: none;
-  font-weight: bold;
-  font-size: 1.7rem;
-}
-
 .letters {
   margin: 0 auto;
   margin-top: 30px;
@@ -50,8 +36,8 @@
 .sortingSelect select {
   font-size: 1rem;
   appearance: none;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
 }
 
 .showTypeSelect select:focus,

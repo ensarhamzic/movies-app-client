@@ -10,3 +10,48 @@
   margin: 1em 0;
   padding: 0;
 }
+
+.collapse {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.warning {
+  color: #ec7d78;
+  font-size: 1.3rem;
+  font-weight: bold;
+  font-style: italic;
+  padding: 10px;
+  border: 1px solid #ec7d78;
+  text-align: center;
+  width: 500px;
+  margin: 0;
+  margin-left: 20px;
+}
+
+.deleteAccountButton {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #df6c5e;
+  font-size: 1rem;
+}
+
+.deleteAccountButton:hover {
+  background-color: #bd5a4c;
+}
+
+@media only screen and (max-width: 1300px) {
+  .collapse {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .warning {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
