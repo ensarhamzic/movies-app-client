@@ -1,0 +1,23 @@
+.header {
+  font-size: 2.5rem;
+}
+
+.wrapper hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #dedede;
+  margin: 1em 0;
+  padding: 0;
+}
+
+.selectTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.chartTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}

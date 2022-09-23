@@ -23,6 +23,7 @@ import Favorites from "./pages/Favorites/Favorites"
 import Published from "./components/Published/Published"
 import Settings from "./pages/Settings/Settings"
 import Profile from "./pages/Profile/Profile"
+import Dashboards from "./pages/Dashboards/Dashboards"
 
 const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
@@ -31,6 +32,7 @@ const App = () => {
   const dispatch = useDispatch()
   const isAuth = useSelector((state) => state.auth.isAuth)
   const authToken = useSelector((state) => state.auth.token)
+  const genres = useSelector((state) => state.genres.data)
   const {
     error: verifyTokenError,
     isLoading: loggingIn,
@@ -85,6 +87,7 @@ const App = () => {
   }, [isAuth, getCollections, authToken, dispatch])
 
   useEffect(() => {
+    if (genres.length > 0) return
     ;(async () => {
       const response = await getGenres({
         url: `https://api.themoviedb.org/3/genre/movie/list?api_key=${TMDB_API_KEY}`,
@@ -96,7 +99,7 @@ const App = () => {
 
       dispatch(genresActions.loadGenres({ genres: response.genres }))
     })()
-  }, [dispatch, getGenres])
+  }, [dispatch, getGenres, genres])
 
   useEffect(() => {
     if (isAuth) {
@@ -148,6 +151,7 @@ const App = () => {
             <Route path="/add-collection" element={<AddCollection />} />
             <Route path="/add-items" element={<AddItems />} />
             <Route path="/publish" element={<Publish />} />
+            <Route path="/dashboards" element={<Dashboards />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
