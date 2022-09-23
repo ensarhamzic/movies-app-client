@@ -15,6 +15,7 @@ import ReactSelect from "react-select"
 import { useSelector } from "react-redux"
 import useHttp from "../../hooks/use-http"
 import Spinner from "../../components/Spinner/Spinner"
+import Card from "../../components/Card/Card"
 const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
@@ -169,20 +170,20 @@ const Dashboards = () => {
         onChange={setCollection}
       />
       {genresChartData && (
-        <>
+        <Card className={classes.card}>
           <p className={classes.chartTitle}>Movies By Genres</p>
           <Bar options={genresOptions} data={genresChartData} />
-        </>
+        </Card>
       )}
       {ratingsChartData && (
-        <>
+        <Card className={classes.card}>
           <p className={classes.chartTitle}>Movies By Rating</p>
           <Bar
             options={ratingsOptions}
             data={ratingsChartData}
             style={{ height: "300px !important" }}
           />
-        </>
+        </Card>
       )}
     </AuthPageWrapper>
   )
